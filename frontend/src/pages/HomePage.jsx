@@ -2,7 +2,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setChannels } from '../slices/channelsSlice';
-import Channels from './Channels';
+import { setMessages } from '../slices/messagesSlice';
+import Channels from '../components/Channels';
+import Messages from '../components/Messages';
 
 const getAuthHeader = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -24,10 +26,16 @@ const HomePage = () => {
         headers: authHeader,
       });
       dispatch(setChannels(response.data.channels));
+      dispatch(setMessages(response.data.messages));
     };
     requestData();
   }, []);
-  return <Channels />;
+  return (
+    <>
+      <Channels />
+      <Messages />
+    </>
+  );
 };
 
 export default HomePage;
