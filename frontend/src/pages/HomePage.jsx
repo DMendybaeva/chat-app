@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setChannels } from '../slices/channelsSlice';
+import Channels from './Channels';
 
 const getAuthHeader = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -13,18 +16,18 @@ const getAuthHeader = () => {
 
 const HomePage = () => {
   const authHeader = getAuthHeader();
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const requestData = async () => {
       const response = await axios.get('/api/v1/data', {
         headers: authHeader,
       });
-      setData(response.data.channels);
+      dispatch(setChannels(response.data.channels));
     };
     requestData();
   }, []);
-  return data.map((el) => <div key={el.id}>{el.name}</div>);
+  return <Channels />;
 };
 
 export default HomePage;
