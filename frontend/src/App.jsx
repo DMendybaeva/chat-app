@@ -8,11 +8,15 @@ import AuthContext from './contexts/index';
 import useAuth from './hooks/index';
 
 const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const initialState = {
+    loggedIn: Boolean(localStorage.getItem('user')),
+  };
+
+  const [loggedIn, setLoggedIn] = useState(initialState);
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
-    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     setLoggedIn(false);
   };
 
