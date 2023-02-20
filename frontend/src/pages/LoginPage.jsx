@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/index';
+import test from '../images/login.jpg';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
@@ -38,27 +39,66 @@ const LoginPage = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="username">
-        name
-        <input
-          id="username"
-          name="username"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.username}
-          ref={inputEl}
-        />
-        <div>{formik.errors.username}</div>
-      </label>
-      <label htmlFor="password">
-        password
-        <input id="password" name="password" onChange={formik.handleChange} value={formik.values.lastName} />
-        <div>{formik.errors.password}</div>
-      </label>
-      <div>{error}</div>
-      <button type="submit">Submit</button>
-    </form>
+    <div className="container-fluid h-100">
+      <div className="row justify-content-center align-content-center h-100">
+        <div className="col-12 col-md-8 col-xxl-6">
+          <div className="card shadow-sm">
+            <div className="card-body row p-5">
+              <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                <img src={test} alt="Войти" className="rounded-circle" />
+              </div>
+              <form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
+                <h1 className="text-center mb-4">Войти</h1>
+                <div className="form-floating mb-3">
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    placeholder="Ваш ник"
+                    className="form-control"
+                    autoComplete="username"
+                    onChange={formik.handleChange}
+                    value={formik.values.username}
+                    ref={inputEl}
+                  />
+                  <label htmlFor="username">
+                    Ваш ник
+                    <div>{formik.errors.username}</div>
+                  </label>
+                </div>
+                <div className="form-floating mb-4">
+                  <input
+                    id="password"
+                    name="password"
+                    required
+                    placeholder="Пароль"
+                    className="form-control"
+                    autoComplete="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.lastName}
+                  />
+                  <label htmlFor="password">
+                    Пароль
+                    <div>{formik.errors.password}</div>
+                  </label>
+                </div>
+                <div>{error}</div>
+                <button type="submit" className="w-100 mb-3 btn btn-outline-primary">
+                  Submit
+                </button>
+              </form>
+            </div>
+            <div className="card-footer p-4">
+              <div className="text-center">
+                <span>Нет аккаунта?</span>
+                <a href="/signup">Регистрация</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
