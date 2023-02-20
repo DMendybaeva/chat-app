@@ -25,43 +25,48 @@ const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 
+const AuthButton = () => {
+  const auth = useAuth();
+
+  return auth.loggedIn ? (
+    <button type="button" className="btn btn-primary" onClick={auth.logOut}>
+      Выйти
+    </button>
+  ) : null;
+};
+
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
   return auth.loggedIn ? children : <Navigate to="/login" />;
 };
 
-const AuthButton = () => {
-  const auth = useAuth();
-
-  return auth.loggedIn ? (
-    <button type="button" onClick={auth.logOut}>
-      Log out
-    </button>
-  ) : (
-    <button type="button" to="/login">
-      Log in
-    </button>
-  );
-};
-
 const App = () => (
   <AuthProvider>
-    <AuthButton />
-    <div className="App">
-      <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+    <div className="h-100 bg-light">
+      <div className="h-100" id="chat">
+        <div className="d-flex flex-column h-100">
+          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+            <div className="container">
+              <Link className="navbar-brand" to="/">
+                Hexlet Chat
+              </Link>
+              <AuthButton />
+            </div>
+          </nav>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </div>
     </div>
   </AuthProvider>
 );
