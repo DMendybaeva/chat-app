@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setChannels } from '../slices/channelsSlice';
 import { setMessages } from '../slices/messagesSlice';
 import Channels from '../components/Channels';
@@ -19,6 +19,8 @@ const getAuthHeader = () => {
 const HomePage = () => {
   const authHeader = getAuthHeader();
   const dispatch = useDispatch();
+  const { currentChannelId, channels } = useSelector((state) => state.channels);
+  const currentChannel = channels.find((channel) => channel.id === currentChannelId);
 
   useEffect(() => {
     const requestData = async () => {
@@ -30,6 +32,7 @@ const HomePage = () => {
     };
     requestData();
   }, []);
+
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
@@ -50,7 +53,7 @@ const HomePage = () => {
           <div className="d-flex flex-column h-100">
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
-                <b># general</b>
+                <b># {currentChannel?.name}</b>
               </p>
               <span className="text-muted">2 сообщения</span>
             </div>

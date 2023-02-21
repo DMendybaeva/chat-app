@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const [loggedIn, setLoggedIn] = useState(initialState);
+  const [username, setUsername] = useState({});
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
@@ -20,7 +21,11 @@ const AuthProvider = ({ children }) => {
     setLoggedIn(false);
   };
 
-  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut }), [loggedIn]);
+  const getUsername = (data) => {
+    setUsername(data);
+  };
+
+  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut, getUsername, username }), [loggedIn]);
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

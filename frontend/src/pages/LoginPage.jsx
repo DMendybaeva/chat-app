@@ -31,6 +31,7 @@ const LoginPage = () => {
         const response = await axios.post('/api/v1/login', values);
         localStorage.setItem('user', JSON.stringify(response.data));
         auth.logIn();
+        auth.getUsername(response.data.username);
         navigate('/');
       } catch (e) {
         setError('the username or password is incorrect');

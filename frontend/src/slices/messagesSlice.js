@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -5,11 +6,10 @@ const initialState = {
 };
 
 const messagesSlice = createSlice({
-  name: 'channels',
+  name: 'messages',
   initialState,
   reducers: {
     setMessages: (state, { payload }) => {
-      // eslint-disable-next-line no-param-reassign
       state.messages = payload;
     },
   },
