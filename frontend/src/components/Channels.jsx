@@ -1,14 +1,14 @@
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentChannelId } from '../slices/channelsSlice';
+import { setCurrentChannelId } from '../slices/chatsSlice';
 
 const Channels = () => {
-  const { channels } = useSelector((state) => state.channels);
+  const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
   const handleClick = (channel) => () => {
     dispatch(setCurrentChannelId(channel.id));
   };
-  const { currentChannelId } = useSelector((state) => state.channels);
+  const { currentChannelId } = useSelector((state) => state.chats);
 
   return (
     <ul className="nav flex-column nav-pills nav-fill px-2">

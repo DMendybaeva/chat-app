@@ -8,13 +8,23 @@ export const AuthProvider = ({ children }) => {
 
   const [loggedIn, setLoggedIn] = useState(initialState);
 
+  const getAuthHeader = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.token) {
+      return { Authorization: `Bearer ${user.token}` };
+    }
+
+    return {};
+  };
+
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
     localStorage.removeItem('user');
     setLoggedIn(false);
   };
 
-  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut }), [loggedIn]);
+  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut, getAuthHeader }), [loggedIn]);
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
