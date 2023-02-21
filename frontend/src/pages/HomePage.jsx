@@ -20,7 +20,9 @@ const HomePage = () => {
   const authHeader = getAuthHeader();
   const dispatch = useDispatch();
   const { currentChannelId, channels } = useSelector((state) => state.channels);
+  const { messages } = useSelector((state) => state.messages);
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
+  const messagesCount = messages.filter((message) => message.messageId === currentChannelId).length;
 
   useEffect(() => {
     const requestData = async () => {
@@ -55,7 +57,7 @@ const HomePage = () => {
               <p className="m-0">
                 <b># {currentChannel?.name}</b>
               </p>
-              <span className="text-muted">2 сообщения</span>
+              <span className="text-muted">{messagesCount} сообщения</span>
             </div>
             <Messages />
             <div className="mt-auto px-5 py-3">
