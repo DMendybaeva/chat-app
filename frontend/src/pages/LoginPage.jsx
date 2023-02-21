@@ -1,10 +1,11 @@
+import { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/index';
-import test from '../images/login.jpg';
+
+import { useAuth } from '../providers/AuthProvider/index';
+import login from '../images/login.jpg';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
@@ -31,7 +32,6 @@ const LoginPage = () => {
         const response = await axios.post('/api/v1/login', values);
         localStorage.setItem('user', JSON.stringify(response.data));
         auth.logIn();
-        auth.getUsername(response.data.username);
         navigate('/');
       } catch (e) {
         setError('the username or password is incorrect');
@@ -46,7 +46,7 @@ const LoginPage = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src={test} alt="Войти" className="rounded-circle" />
+                <img src={login} alt="Войти" className="rounded-circle" />
               </div>
               <form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
                 <h1 className="text-center mb-4">Войти</h1>

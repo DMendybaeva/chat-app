@@ -1,34 +1,9 @@
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
-import { useState, useMemo } from 'react';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
-import AuthContext from './contexts/index';
-import useAuth from './hooks/index';
-
-const AuthProvider = ({ children }) => {
-  const initialState = {
-    loggedIn: Boolean(localStorage.getItem('user')),
-  };
-
-  const [loggedIn, setLoggedIn] = useState(initialState);
-  const [username, setUsername] = useState({});
-
-  const logIn = () => setLoggedIn(true);
-  const logOut = () => {
-    localStorage.removeItem('user');
-    setLoggedIn(false);
-  };
-
-  const getUsername = (data) => {
-    setUsername(data);
-  };
-
-  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut, getUsername, username }), [loggedIn]);
-
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
-};
+import { useAuth, AuthProvider } from './providers/AuthProvider/index';
 
 const AuthButton = () => {
   const auth = useAuth();

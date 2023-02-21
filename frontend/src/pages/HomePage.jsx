@@ -1,6 +1,7 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
 import { setChannels } from '../slices/channelsSlice';
 import { setMessages } from '../slices/messagesSlice';
 import Channels from '../components/Channels';
