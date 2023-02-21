@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 import { useAuth } from '../providers/AuthProvider/index';
-import login from '../images/login.jpg';
+import imgSrc from '../images/login.jpg';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
@@ -46,7 +46,7 @@ const LoginPage = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src={login} alt="Войти" className="rounded-circle" />
+                <img src={imgSrc} alt="Войти" className="rounded-circle" />
               </div>
               <form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
                 <h1 className="text-center mb-4">Войти</h1>
