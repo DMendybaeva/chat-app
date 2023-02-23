@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { useAuth, AuthProvider } from './providers/AuthProvider/index';
 import { Navbar } from './components/Navbar';
+import { Layout } from './components/Layout';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -13,25 +14,21 @@ const PrivateRoute = ({ children }) => {
 
 const App = () => (
   <AuthProvider>
-    <div className="h-100 bg-light">
-      <div className="h-100" id="chat">
-        <div className="d-flex flex-column h-100">
-          <Navbar />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <HomePage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
+    <Layout>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Layout>
   </AuthProvider>
 );
 
