@@ -2,9 +2,7 @@ import { useState, useMemo } from 'react';
 import { AuthContext } from './AuthContext';
 
 export const AuthProvider = ({ children }) => {
-  const initialState = {
-    loggedIn: Boolean(localStorage.getItem('user')),
-  };
+  const initialState = Boolean(localStorage.getItem('user'));
 
   const [loggedIn, setLoggedIn] = useState(initialState);
 

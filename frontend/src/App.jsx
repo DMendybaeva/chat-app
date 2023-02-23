@@ -1,10 +1,10 @@
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { useAuth, AuthProvider } from './providers/AuthProvider/index';
-import { AuthButton } from './components/AuthButton';
+import { Navbar } from './components/Navbar';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -16,14 +16,7 @@ const App = () => (
     <div className="h-100 bg-light">
       <div className="h-100" id="chat">
         <div className="d-flex flex-column h-100">
-          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-            <div className="container">
-              <Link className="navbar-brand" to="/">
-                Hexlet Chat
-              </Link>
-              <AuthButton />
-            </div>
-          </nav>
+          <Navbar />
           <Routes>
             <Route
               path="/"
