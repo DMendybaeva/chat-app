@@ -4,16 +4,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { useAuth, AuthProvider } from './providers/AuthProvider/index';
-
-const AuthButton = () => {
-  const auth = useAuth();
-
-  return auth.loggedIn ? (
-    <button type="button" className="btn btn-primary" onClick={auth.logOut}>
-      Выйти
-    </button>
-  ) : null;
-};
+import { AuthButton } from './components/AuthButton';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
