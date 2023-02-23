@@ -6,13 +6,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './App';
 import store from './slices/index';
+import { AuthProvider } from './providers/AuthProvider/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
