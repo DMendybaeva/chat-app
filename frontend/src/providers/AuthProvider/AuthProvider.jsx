@@ -16,13 +16,15 @@ export const AuthProvider = ({ children }) => {
     return {};
   };
 
+  const getUserInfo = () => JSON.parse(localStorage.getItem('user')) || {};
+
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
     localStorage.removeItem('user');
     setLoggedIn(false);
   };
 
-  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut, getAuthHeader }), [loggedIn]);
+  const authInfo = useMemo(() => ({ loggedIn, logIn, logOut, getAuthHeader, getUserInfo }), [loggedIn]);
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

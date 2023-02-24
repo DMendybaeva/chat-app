@@ -24,7 +24,7 @@ const LoginPage = () => {
       password: '',
     },
     validationSchema: Yup.object({
-      username: Yup.string().max(5, 'Must be 5 characters or less').required('Required'),
+      username: Yup.string().required('Required'),
       password: Yup.string().required('Required'),
     }),
     onSubmit: async (values) => {
