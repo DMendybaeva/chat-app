@@ -1,54 +1,18 @@
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import NotFoundPage from './pages/NotFoundPage';
-import { useAuth, AuthProvider } from './providers/AuthProvider/index';
-
-const AuthButton = () => {
-  const auth = useAuth();
-
-  return auth.loggedIn ? (
-    <button type="button" className="btn btn-primary" onClick={auth.logOut}>
-      Выйти
-    </button>
-  ) : null;
-};
-
-const PrivateRoute = ({ children }) => {
-  const auth = useAuth();
-  return auth.loggedIn ? children : <Navigate to="/login" />;
-};
+import { Navbar } from './components/Navbar';
+import { Layout } from './components/Layout';
+import { routes } from './routes';
 
 const App = () => (
-  <AuthProvider>
-    <div className="h-100 bg-light">
-      <div className="h-100" id="chat">
-        <div className="d-flex flex-column h-100">
-          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-            <div className="container">
-              <Link className="navbar-brand" to="/">
-                Hexlet Chat
-              </Link>
-              <AuthButton />
-            </div>
-          </nav>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <HomePage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
-  </AuthProvider>
+  <Layout>
+    <Navbar />
+    <Routes>
+      {routes.map(({ path, element }) => (
+        <Route path={path} element={element} key={path} />
+      ))}
+    </Routes>
+  </Layout>
 );
 
 export default App;

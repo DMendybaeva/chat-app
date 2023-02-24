@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 import { useAuth } from '../providers/AuthProvider/index';
-import imgSrc from '../images/login.jpg';
+import imgSrc from '../assets/login.jpg';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
@@ -86,7 +86,7 @@ const LoginPage = () => {
                 </div>
                 <div>{error}</div>
                 <button type="submit" className="w-100 mb-3 btn btn-outline-primary">
-                  Submit
+                  Войти
                 </button>
               </form>
             </div>
