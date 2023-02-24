@@ -1,24 +1,41 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useFormik } from 'formik';
 
 import { fetchChats } from '../slices/chatsSlice';
 import Channels from '../components/Channels';
 import Messages from '../components/Messages';
 import { useAuth } from '../providers/AuthProvider/useAuth';
+import { useSocket } from '../providers/SocketProvider';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const inputEl = useRef();
   const { currentChannelId, channels } = useSelector((state) => state.chats);
   const { messages } = useSelector((state) => state.chats);
-  const { getAuthHeader } = useAuth();
+  const { getAuthHeader, getUserInfo } = useAuth();
+  const { newMessage } = useSocket();
 
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
-  const messagesCount = messages.filter((message) => message.messageId === currentChannelId).length;
+  const messagesCount = messages.filter((message) => message.channelId === currentChannelId).length;
 
   useEffect(() => {
     const headers = getAuthHeader();
     dispatch(fetchChats(headers));
+    inputEl.current.focus();
   }, []);
+
+  const formik = useFormik({
+    initialValues: {
+      text: '',
+    },
+    onSubmit: ({ text }) => {
+      const { username } = getUserInfo();
+      const message = { channelId: currentChannelId, text, username };
+      newMessage(message);
+      formik.resetForm();
+    },
+  });
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -46,14 +63,16 @@ const HomePage = () => {
             </div>
             <Messages />
             <div className="mt-auto px-5 py-3">
-              <form noValidate="" className="py-1 border rounded-2">
+              <form noValidate="" className="py-1 border rounded-2" onSubmit={formik.handleSubmit}>
                 <div className="input-group has-validation">
                   <input
-                    name="body"
+                    name="text"
                     aria-label="Новое сообщение"
                     placeholder="Введите сообщение..."
                     className="border-0 p-0 ps-2 form-control"
-                    value=""
+                    value={formik.values.text}
+                    onChange={formik.handleChange}
+                    ref={inputEl}
                   />
                   <button type="submit" disabled="" className="btn btn-group-vertical">
                     <svg

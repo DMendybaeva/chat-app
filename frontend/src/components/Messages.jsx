@@ -8,8 +8,8 @@ const Messages = () => {
       {messages
         .filter((message) => message.channelId === currentChannelId)
         .map((message) => (
-          <div className="text-break mb-2" key={message.messageId}>
-            <b>{message.username}</b>: {message.body}
+          <div className="text-break mb-2" key={message.id}>
+            <b>{message.username}</b>: {message.text}
           </div>
         ))}
     </div>

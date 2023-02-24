@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const initialState = {
   channels: [],
-  messages: [],
+  messages: [], // {text, author, channelId, id}
   currentChannelId: null,
 };
 
@@ -22,6 +22,9 @@ const chatsSlice = createSlice({
     setCurrentChannelId: (state, { payload }) => {
       state.currentChannelId = payload;
     },
+    addMessage: (state, { payload }) => {
+      state.messages = [...state.messages, payload];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.fulfilled, (state, action) => {
@@ -32,5 +35,5 @@ const chatsSlice = createSlice({
   },
 });
 
-export const { setCurrentChannelId } = chatsSlice.actions;
+export const { setCurrentChannelId, addMessage } = chatsSlice.actions;
 export default chatsSlice.reducer;
