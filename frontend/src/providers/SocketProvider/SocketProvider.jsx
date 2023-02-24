@@ -19,7 +19,7 @@ export const SocketProvider = ({ children, socket }) => {
     <SocketContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        newMessage: (message) => socket.emit('newMessage', message),
+        newMessage: (message) => socket.volatile.emit('newMessage', message),
       }}
     >
       {children}
