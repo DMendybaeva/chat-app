@@ -1,5 +1,7 @@
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
+import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
+
 import { setCurrentChannelId } from '../slices/chatsSlice';
 
 const Channels = () => {
@@ -9,24 +11,36 @@ const Channels = () => {
     dispatch(setCurrentChannelId(channel.id));
   };
   const { currentChannelId } = useSelector((state) => state.chats);
+  const getVariant = (id) => (currentChannelId === id ? 'secondary' : 'light');
+  const classes = cn('w-100', 'rounded-0', 'text-start');
+  const getChannelName = (name) => `# ${name}`;
 
   return (
-    <ul className="nav flex-column nav-pills nav-fill px-2">
-      {channels.map((channel) => (
-        <li className="nav-item w-100" key={channel.id}>
-          <button
-            type="button"
-            className={cn('w-100', 'rounded-0', 'text-start', 'btn', {
-              'btn-secondary': currentChannelId === channel.id,
-            })}
+    <Nav fill variant="pills" className="flex-column px-2">
+      {channels.map((channel) => {
+        if (!channel.removable) {
+          return (
+            <Nav.Item className="w-100" key={channel.id}>
+              <Button variant={getVariant(channel.id)} className={classes} onClick={handleClick(channel)}>
+                {getChannelName(channel.name)}
+              </Button>
+            </Nav.Item>
+          );
+        }
+        return (
+          <SplitButton
+            size="sm"
+            variant={getVariant(channel.id)}
             onClick={handleClick(channel)}
+            title={getChannelName(channel.name)}
+            className={classes}
           >
-            <span className="me-1">#</span>
-            {channel.name}
-          </button>
-        </li>
-      ))}
-    </ul>
+            <Dropdown.Item eventKey="1">Удалить</Dropdown.Item>
+            <Dropdown.Item eventKey="2">Переименовать</Dropdown.Item>
+          </SplitButton>
+        );
+      })}
+    </Nav>
   );
 };
 export default Channels;
