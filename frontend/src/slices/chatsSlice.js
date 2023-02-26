@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-  channels: [],
+  channels: [], // {name, id, removable}
   messages: [], // {text, author, channelId, id}
   currentChannelId: null,
 };
@@ -25,6 +25,9 @@ const chatsSlice = createSlice({
     addMessage: (state, { payload }) => {
       state.messages = [...state.messages, payload];
     },
+    addChannel: (state, { payload }) => {
+      state.channels = [...state.channels, payload];
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.fulfilled, (state, action) => {
@@ -35,5 +38,5 @@ const chatsSlice = createSlice({
   },
 });
 
-export const { setCurrentChannelId, addMessage } = chatsSlice.actions;
+export const { setCurrentChannelId, addMessage, addChannel } = chatsSlice.actions;
 export default chatsSlice.reducer;
