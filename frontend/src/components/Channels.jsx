@@ -4,7 +4,7 @@ import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
 
 import { setCurrentChannelId } from '../slices/chatsSlice';
 
-const Channels = () => {
+const Channels = ({ handleRemove }) => {
   const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
   const handleClick = (channel) => () => {
@@ -35,7 +35,9 @@ const Channels = () => {
             title={getChannelName(channel.name)}
             className={classes}
           >
-            <Dropdown.Item eventKey="1">Удалить</Dropdown.Item>
+            <Dropdown.Item eventKey="1" onClick={handleRemove(channel)}>
+              Удалить
+            </Dropdown.Item>
             <Dropdown.Item eventKey="2">Переименовать</Dropdown.Item>
           </SplitButton>
         );

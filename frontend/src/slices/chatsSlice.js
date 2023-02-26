@@ -27,7 +27,10 @@ const chatsSlice = createSlice({
     },
     addChannel: (state, { payload }) => {
       state.channels = [...state.channels, payload];
-    }
+    },
+    removeChannel: (state, { payload }) => {
+      state.channels = state.channels.filter(({ id }) => id !== payload.id);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.fulfilled, (state, action) => {
@@ -38,5 +41,5 @@ const chatsSlice = createSlice({
   },
 });
 
-export const { setCurrentChannelId, addMessage, addChannel } = chatsSlice.actions;
+export const { setCurrentChannelId, addMessage, addChannel, removeChannel } = chatsSlice.actions;
 export default chatsSlice.reducer;

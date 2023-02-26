@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 
 import { useSocket } from '../providers/SocketProvider';
 
-export const AddChannelModal = ({ handleHide, show }) => {
+export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
 
   const formik = useFormik({
@@ -15,12 +15,11 @@ export const AddChannelModal = ({ handleHide, show }) => {
       newChannel(channel);
       formik.resetForm();
       handleHide();
-      formik.resetForm();
     },
   });
 
   return (
-    <Modal show={show} onHide={handleHide} centered>
+    <Modal show onHide={handleHide} centered>
       <Modal.Header closeButton>
         <Modal.Title>Добавить канал</Modal.Title>
       </Modal.Header>
