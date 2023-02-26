@@ -7,12 +7,14 @@ import Channels from '../components/Channels';
 import Messages from '../components/Messages';
 import { AddChannelModal } from '../components/AddChannelModal';
 import { RemoveChannelModal } from '../components/RemoveChannelModal';
+import { RenameChannelModal } from '../components/RenameChannelModal';
 import { useAuth } from '../providers/AuthProvider/useAuth';
 import { useSocket } from '../providers/SocketProvider';
 
 const modals = {
   adding: AddChannelModal,
   removing: RemoveChannelModal,
+  renaming: RenameChannelModal,
 };
 const getModal = (modalName) => modals[modalName];
 
@@ -51,6 +53,10 @@ const HomePage = () => {
     setModalInfo({ modalType: 'removing', modalChannel: channel });
   };
 
+  const handleRename = (channel) => () => {
+    setModalInfo({ modalType: 'renaming', modalChannel: channel });
+  };
+
   useEffect(() => {
     const headers = getAuthHeader();
     dispatch(fetchChats(headers));
@@ -84,7 +90,7 @@ const HomePage = () => {
             </button>
             {renderModal({ modalInfo, handleHide })}
           </div>
-          <Channels handleRemove={handleRemove} />
+          <Channels handleRemove={handleRemove} handleRename={handleRename} />
         </div>
         <div className="col p-0 h-100">
           <div className="d-flex flex-column h-100">
