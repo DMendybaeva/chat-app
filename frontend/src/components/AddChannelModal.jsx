@@ -1,15 +1,19 @@
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
 
 import { useSocket } from '../providers/SocketProvider';
+import { AddChannelSchema } from '../validation/validation';
 
 export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
+  const { channels } = useSelector((state) => state.chats);
 
   const formik = useFormik({
     initialValues: {
       channelName: '',
     },
+    validationSchema: AddChannelSchema(channels),
     onSubmit: (values) => {
       const channel = { name: values.channelName };
       newChannel(channel);
@@ -26,6 +30,9 @@ export const AddChannelModal = ({ handleHide }) => {
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
+            <Form.Label visuallyHidden htmlFor="channelName">
+              Имя канала
+            </Form.Label>
             <Form.Control
               data-testid="input-body"
               id="channelName"
@@ -33,12 +40,9 @@ export const AddChannelModal = ({ handleHide }) => {
               type="text"
               onChange={formik.handleChange}
               value={formik.values.channelName}
-              autoFocus
+              isInvalid={formik.errors.channelName}
             />
-            <Form.Label visuallyHidden htmlFor="channelName">
-              Имя канала
-            </Form.Label>
-            <div className="invalid-feedback" />
+            <Form.Control.Feedback type="invalid">{formik.errors.channelName}</Form.Control.Feedback>
             <div className="d-flex justify-content-end">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
                 Отменить
