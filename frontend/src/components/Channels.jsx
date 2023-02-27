@@ -34,6 +34,7 @@ const Channels = ({ handleRemove, handleRename }) => {
             onClick={handleClick(channel)}
             title={getChannelName(channel.name)}
             className={classes}
+            key={channel.id}
           >
             <Dropdown.Item eventKey="1" onClick={handleRemove(channel)}>
               Удалить
