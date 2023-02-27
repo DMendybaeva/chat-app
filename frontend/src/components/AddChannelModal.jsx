@@ -47,7 +47,7 @@ export const AddChannelModal = ({ handleHide }) => {
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
                 Отменить
               </Button>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
                 Отправить
               </Button>
             </div>
