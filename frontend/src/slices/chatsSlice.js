@@ -29,6 +29,9 @@ const chatsSlice = createSlice({
       state.channels = [...state.channels, payload];
     },
     removeChannel: (state, { payload }) => {
+      if (state.currentChannelId === payload.id) {
+        state.currentChannelId = 1;
+      }
       state.channels = state.channels.filter(({ id }) => id !== payload.id);
       state.messages = state.messages.filter((message) => message.channelId !== payload.id);
     },
