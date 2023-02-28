@@ -10,7 +10,6 @@ export const RenameChannelModal = ({ modalInfo, handleHide }) => {
   const { renameChannel } = useSocket();
   const { channels } = useSelector((state) => state.chats);
   const inputEl = useRef(null);
-  const oldChannel = modalInfo.modalChannel;
 
   useEffect(() => {
     inputEl.current.focus();
@@ -18,11 +17,11 @@ export const RenameChannelModal = ({ modalInfo, handleHide }) => {
 
   const formik = useFormik({
     initialValues: {
-      channelName: oldChannel.name,
+      channelName: modalInfo.modalChannel.name,
     },
     validationSchema: AddChannelSchema(channels),
     onSubmit: (values) => {
-      const newChannel = { id: oldChannel.id, name: values.channelName };
+      const newChannel = { id: modalInfo.modalChannel.id, name: values.channelName };
       renameChannel(newChannel);
       formik.resetForm();
       handleHide();

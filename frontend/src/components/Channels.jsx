@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
 
@@ -11,25 +10,28 @@ const Channels = ({ handleRemove, handleRename }) => {
     dispatch(setCurrentChannelId(channel.id));
   };
   const { currentChannelId } = useSelector((state) => state.chats);
-  const getVariant = (id) => (currentChannelId === id ? 'secondary' : 'light');
-  const classes = cn('w-100', 'rounded-0', 'text-start');
-  const getChannelName = (name) => `# ${name}`;
+
+  const classes = 'w-100 rounded-0 text-start';
 
   return (
     <Nav fill variant="pills" className="flex-column px-2">
       {channels.map((channel) =>
         !channel.removable ? (
           <Nav.Item className="w-100" key={channel.id}>
-            <Button variant={getVariant(channel.id)} className={classes} onClick={handleClick(channel)}>
-              {getChannelName(channel.name)}
+            <Button
+              variant={currentChannelId === channel.id ? 'secondary' : 'light'}
+              className={classes}
+              onClick={handleClick(channel)}
+            >
+              {`# ${channel.name}`}
             </Button>
           </Nav.Item>
         ) : (
           <SplitButton
             size="sm"
-            variant={getVariant(channel.id)}
+            variant={currentChannelId === channel.id ? 'secondary' : 'light'}
             onClick={handleClick(channel)}
-            title={getChannelName(channel.name)}
+            title={`# ${channel.name}`}
             className={classes}
             key={channel.id}
           >
