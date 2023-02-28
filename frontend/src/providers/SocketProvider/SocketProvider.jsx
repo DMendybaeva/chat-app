@@ -13,7 +13,7 @@ export const SocketProvider = ({ children, socket }) => {
       removeChannel: (channel) => socket.volatile.emit('removeChannel', channel),
       renameChannel: (channel) => socket.volatile.emit('renameChannel', channel),
     }),
-    [removeChannel, renameChannel],
+    [addMessage, addChannel, removeChannel, renameChannel],
   );
 
   useEffect(() => {
