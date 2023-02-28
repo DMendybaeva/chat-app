@@ -1,8 +1,9 @@
-import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
+import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
+
 import { setCurrentChannelId } from '../slices/chatsSlice';
 
-const Channels = () => {
+const Channels = ({ handleRemove, handleRename }) => {
   const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
   const handleClick = (channel) => () => {
@@ -10,23 +11,40 @@ const Channels = () => {
   };
   const { currentChannelId } = useSelector((state) => state.chats);
 
+  const classes = 'w-100 rounded-0 text-start';
+
   return (
-    <ul className="nav flex-column nav-pills nav-fill px-2">
-      {channels.map((channel) => (
-        <li className="nav-item w-100" key={channel.id}>
-          <button
-            type="button"
-            className={cn('w-100', 'rounded-0', 'text-start', 'btn', {
-              'btn-secondary': currentChannelId === channel.id,
-            })}
+    <Nav fill variant="pills" className="flex-column px-2">
+      {channels.map((channel) =>
+        !channel.removable ? (
+          <Nav.Item className="w-100" key={channel.id}>
+            <Button
+              variant={currentChannelId === channel.id ? 'secondary' : 'light'}
+              className={classes}
+              onClick={handleClick(channel)}
+            >
+              {`# ${channel.name}`}
+            </Button>
+          </Nav.Item>
+        ) : (
+          <SplitButton
+            size="sm"
+            variant={currentChannelId === channel.id ? 'secondary' : 'light'}
             onClick={handleClick(channel)}
+            title={`# ${channel.name}`}
+            className={classes}
+            key={channel.id}
           >
-            <span className="me-1">#</span>
-            {channel.name}
-          </button>
-        </li>
-      ))}
-    </ul>
+            <Dropdown.Item eventKey="1" onClick={handleRemove(channel)}>
+              Удалить
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="2" onClick={handleRename(channel)}>
+              Переименовать
+            </Dropdown.Item>
+          </SplitButton>
+        ),
+      )}
+    </Nav>
   );
 };
 export default Channels;
