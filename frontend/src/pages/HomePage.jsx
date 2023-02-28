@@ -9,16 +9,6 @@ import { useAuth } from '../providers/AuthProvider/useAuth';
 import { useSocket } from '../providers/SocketProvider';
 import { getModal } from '../helpers/getModal';
 
-const renderModal = (props) => {
-  if (!props.modalInfo.modalType) {
-    return null;
-  }
-
-  const Modal = getModal(props.modalInfo.modalType);
-
-  return <Modal modalInfo={props.modalInfo} handleHide={props.handleHide} handleRemove={props.handleRemove} />;
-};
-
 const HomePage = () => {
   const [modalInfo, setModalInfo] = useState({ modalType: null, modalChannel: null }); // { modalType: 'add'||'remove'||'rename' , channel: id }
 
@@ -31,6 +21,16 @@ const HomePage = () => {
 
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
   const messagesCount = messages.filter((message) => message.channelId === currentChannelId).length;
+
+  const renderModal = (props) => {
+    if (!props.modalInfo.modalType) {
+      return null;
+    }
+
+    const Modal = getModal(props.modalInfo.modalType);
+
+    return <Modal modalInfo={props.modalInfo} handleHide={props.handleHide} handleRemove={props.handleRemove} />;
+  };
 
   const handleAddTask = () => {
     setModalInfo({ modalType: 'adding', currentChannel: null });
