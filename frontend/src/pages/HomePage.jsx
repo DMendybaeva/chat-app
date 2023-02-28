@@ -5,18 +5,9 @@ import { useFormik } from 'formik';
 import { fetchChats } from '../slices/chatsSlice';
 import Channels from '../components/Channels';
 import Messages from '../components/Messages';
-import { AddChannelModal } from '../components/AddChannelModal';
-import { RemoveChannelModal } from '../components/RemoveChannelModal';
-import { RenameChannelModal } from '../components/RenameChannelModal';
 import { useAuth } from '../providers/AuthProvider/useAuth';
 import { useSocket } from '../providers/SocketProvider';
-
-const modals = {
-  adding: AddChannelModal,
-  removing: RemoveChannelModal,
-  renaming: RenameChannelModal,
-};
-const getModal = (modalName) => modals[modalName];
+import { getModal } from '../helpers/getModal';
 
 const renderModal = (props) => {
   if (!props.modalInfo.modalType) {
