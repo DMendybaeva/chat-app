@@ -17,17 +17,14 @@ const Channels = ({ handleRemove, handleRename }) => {
 
   return (
     <Nav fill variant="pills" className="flex-column px-2">
-      {channels.map((channel) => {
-        if (!channel.removable) {
-          return (
-            <Nav.Item className="w-100" key={channel.id}>
-              <Button variant={getVariant(channel.id)} className={classes} onClick={handleClick(channel)}>
-                {getChannelName(channel.name)}
-              </Button>
-            </Nav.Item>
-          );
-        }
-        return (
+      {channels.map((channel) =>
+        !channel.removable ? (
+          <Nav.Item className="w-100" key={channel.id}>
+            <Button variant={getVariant(channel.id)} className={classes} onClick={handleClick(channel)}>
+              {getChannelName(channel.name)}
+            </Button>
+          </Nav.Item>
+        ) : (
           <SplitButton
             size="sm"
             variant={getVariant(channel.id)}
@@ -43,8 +40,8 @@ const Channels = ({ handleRemove, handleRename }) => {
               Переименовать
             </Dropdown.Item>
           </SplitButton>
-        );
-      })}
+        ),
+      )}
     </Nav>
   );
 };
