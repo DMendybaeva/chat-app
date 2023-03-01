@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const AddChannelSchema = (channels) =>
+export const getChannelValidationSchema = (channels) =>
   yup.object({
     channelName: yup
       .string()
