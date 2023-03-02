@@ -5,13 +5,7 @@ import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import SignupPage from './pages/SignupPage';
 import { useAuth } from './providers/AuthProvider/index';
-
-export const PATHS = {
-  home: '/',
-  login: '/login',
-  notFound: '*',
-  signup: '/signup',
-};
+import { PATHS } from './const';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();

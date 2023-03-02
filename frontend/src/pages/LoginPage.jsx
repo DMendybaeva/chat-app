@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { useAuth } from '../providers/AuthProvider/index';
 import imgSrc from '../assets/login.jpg';
+import { PATHS } from '../const';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
@@ -32,7 +33,7 @@ const LoginPage = () => {
         const response = await axios.post('/api/v1/login', values);
         localStorage.setItem('user', JSON.stringify(response.data));
         auth.logIn();
-        navigate('/');
+        navigate(PATHS.home);
       } catch (e) {
         setError('the username or password is incorrect');
       }

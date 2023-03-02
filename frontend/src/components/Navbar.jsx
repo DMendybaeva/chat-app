@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AuthButton } from './AuthButton';
-import { PATHS } from '../routes';
+import { PATHS } from '../const';
 
 export const Navbar = () => (
   <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
