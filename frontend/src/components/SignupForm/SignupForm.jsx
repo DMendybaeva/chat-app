@@ -1,17 +1,15 @@
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
-import { useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import { getNewUserValidation } from '../validation/getNewUserValidation';
-import { useAuth } from '../providers/AuthProvider/index';
-import { PATHS } from '../const';
+import { getNewUserValidation } from '../../validation/getNewUserValidation';
+import { useAuth } from '../../providers/AuthProvider/index';
+import { PATHS } from '../../const';
 
 export const SignupForm = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +19,7 @@ export const SignupForm = () => {
     },
     validationSchema: getNewUserValidation(),
     validateOnChange: false,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setFieldError }) => {
       try {
         const response = await axios.post('/api/v1/signup', { username: values.username, password: values.password });
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -29,9 +27,9 @@ export const SignupForm = () => {
         navigate(PATHS.home);
       } catch (e) {
         if (e.response.data.statusCode === 409) {
-          setError('Такой пользователь уже существует');
+          setFieldError('auth', 'Такой пользователь уже существует');
         } else {
-          throw new Error(e.response.data);
+          console.log(e.response.data);
         }
       }
     },
@@ -81,7 +79,7 @@ export const SignupForm = () => {
           <Form.Control.Feedback type="invalid" tooltip>
             {formik.errors.repeatedPassword}
           </Form.Control.Feedback>
-          {error && <div style={{ color: 'red' }}>{error}</div>}
+          {formik.errors.auth && <div style={{ color: 'red' }}>{formik.errors.auth}</div>}
         </FloatingLabel>
       </Form.Group>
       <Button variant="outline-primary" type="submit" className="w-100">

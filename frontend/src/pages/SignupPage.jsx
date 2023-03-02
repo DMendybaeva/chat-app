@@ -1,5 +1,5 @@
 import imgSrc from '../assets/signup.jpg';
-import { SignupForm } from '../components/SignupForm';
+import { SignupForm } from '../components/SignupForm/SignupForm';
 
 const SignupPage = () => (
   <div className="container-fluid h-100">
