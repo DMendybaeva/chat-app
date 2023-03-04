@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 import { useSocket } from '../providers/SocketProvider';
-import { AddChannelSchema } from '../validation/getChannelValidationSchema.js';
+import { getChannelValidationSchema } from '../validation/getChannelValidationSchema';
 
 export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
@@ -19,7 +19,7 @@ export const AddChannelModal = ({ handleHide }) => {
     initialValues: {
       channelName: '',
     },
-    validationSchema: AddChannelSchema(channels),
+    validationSchema: getChannelValidationSchema(channels),
     onSubmit: (values) => {
       const channel = { name: values.channelName };
       newChannel(channel);

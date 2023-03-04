@@ -3,13 +3,9 @@ import { Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
+import SignupPage from './pages/SignupPage';
 import { useAuth } from './providers/AuthProvider/index';
-
-export const PATHS = {
-  home: '/',
-  login: '/login',
-  notFound: '*',
-};
+import { PATHS } from './const';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -27,4 +23,5 @@ export const routes = [
       </PrivateRoute>
     ),
   },
+  { path: PATHS.signup, element: <SignupPage /> },
 ];
