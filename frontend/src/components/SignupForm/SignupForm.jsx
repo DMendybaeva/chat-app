@@ -2,6 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { getNewUserValidation } from '../../validation/getNewUserValidation';
 import { useAuth } from '../../providers/AuthProvider/index';
@@ -13,6 +14,7 @@ import { RepeatedPassword } from './RepeatedPassword';
 export const SignupForm = () => {
   const auth = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Formik
@@ -31,7 +33,7 @@ export const SignupForm = () => {
           navigate(PATHS.home);
         } catch (e) {
           if (e.response.data.statusCode === 409) {
-            setFieldError('auth', 'Такой пользователь уже существует');
+            setFieldError('auth', t('forms.signupForm.errors.auth'));
           } else {
             console.log(e.response.data);
           }
@@ -40,12 +42,12 @@ export const SignupForm = () => {
     >
       {(props) => (
         <Form className="w-50" onSubmit={props.handleSubmit}>
-          <h1 className="text-center mb-4">Регистрация</h1>
+          <h1 className="text-center mb-4">{t('forms.signupForm.title')}</h1>
           <UsernameInput />
           <PasswordInput />
           <RepeatedPassword />
           <Button variant="outline-primary" type="submit" className="w-100">
-            Зарегистрироваться
+            {t('forms.signupForm.signupButton')}
           </Button>
         </Form>
       )}
