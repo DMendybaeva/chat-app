@@ -2,6 +2,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useSocket } from '../providers/SocketProvider';
 import { getChannelValidationSchema } from '../validation/getChannelValidationSchema';
@@ -10,6 +11,7 @@ export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
   const { channels } = useSelector((state) => state.chats);
   const inputEl = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputEl.current.focus();

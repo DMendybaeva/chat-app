@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import io from 'socket.io-client';
+import './i18n';
 
 import App from './App';
 import store from './slices/index';

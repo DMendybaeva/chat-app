@@ -2,6 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { getLoginValidation } from '../../validation/getLoginValidation';
 import { PATHS } from '../../const';
@@ -12,6 +13,7 @@ import { useAuth } from '../../providers/AuthProvider/index';
 export const LoginForm = () => {
   const navigate = useNavigate();
   const auth = useAuth();
+  const { t } = useTranslation();
 
   return (
     <Formik
@@ -29,7 +31,7 @@ export const LoginForm = () => {
           navigate(PATHS.home);
         } catch (e) {
           if (e.response.data.statusCode === 401) {
-            setFieldError('auth', 'Неверные имя пользователя или пароль');
+            setFieldError('auth', t('forms.loginForm.errors.auth'));
           } else {
             console.log(e.response.data);
           }
@@ -38,11 +40,11 @@ export const LoginForm = () => {
     >
       {(props) => (
         <Form className="w-50" onSubmit={props.handleSubmit}>
-          <h1 className="text-center mb-4">Регистрация</h1>
+          <h1 className="text-center mb-4">{t('forms.loginForm.title')}</h1>
           <UsernameInput />
           <PasswordInput />
           <Button variant="outline-primary" type="submit" className="w-100">
-            Войти
+            {t('forms.loginForm.loginButton')}
           </Button>
         </Form>
       )}
