@@ -94,6 +94,12 @@ const resources = {
           },
         },
       },
+      addChannelModal: {
+        title: 'Добавить канал',
+        label: 'Имя канала',
+        buttonSend: 'Отправить',
+        buttonCancel: 'Отменить',
+      },
     },
   },
 };

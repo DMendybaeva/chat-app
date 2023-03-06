@@ -2,6 +2,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useSocket } from '../providers/SocketProvider';
 import { getChannelValidationSchema } from '../validation/getChannelValidationSchema';
@@ -10,6 +11,7 @@ export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
   const { channels } = useSelector((state) => state.chats);
   const inputEl = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputEl.current.focus();
@@ -31,13 +33,13 @@ export const AddChannelModal = ({ handleHide }) => {
   return (
     <Modal show onHide={handleHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('addChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Label visuallyHidden htmlFor="channelName">
-              Имя канала
+              {t('addChannelModal.label')}
             </Form.Label>
             <Form.Control
               data-testid="input-body"
@@ -52,10 +54,10 @@ export const AddChannelModal = ({ handleHide }) => {
             <Form.Control.Feedback type="invalid">{formik.errors.channelName}</Form.Control.Feedback>
             <div className="d-flex justify-content-end">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
-                Отменить
+                {t('addChannelModal.buttonCancel')}
               </Button>
               <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
-                Отправить
+                {t('addChannelModal.buttonSend')}
               </Button>
             </div>
           </Form.Group>
