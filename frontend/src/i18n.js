@@ -65,6 +65,13 @@ const resources = {
           },
         },
       },
+      pages: {
+        notFoundPage: {
+          notFound: 'Страница не найдена',
+          go: 'Но вы можете перейти ',
+          homeLink: 'на главную страницу',
+        },
+      },
     },
   },
 };
