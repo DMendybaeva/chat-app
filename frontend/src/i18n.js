@@ -71,6 +71,28 @@ const resources = {
           go: 'Но вы можете перейти ',
           homeLink: 'на главную страницу',
         },
+        homePage: {
+          channels: {
+            channelsTitle: 'Каналы',
+            currentChannel: '# {{ currentChannelName }}',
+            channelName: '# {{channelName}}',
+            dropdownButtonDelete: 'Удалить',
+            dropdownButtonRename: 'Переименовать',
+          },
+          messages: {
+            sendMessageButton: 'Отправить',
+            messagesCount: {
+              key_zero: '{{messagesCount}} сообщений',
+              key_one: '{{messagesCount}} сообщение',
+              key_two: '{{messagesCount}} сообщения',
+              key_few: '{{messagesCount}} сообщения',
+              key_many: '{{messagesCount}} сообщений',
+              key_other: '{{messagesCount}} сообщений',
+            },
+            messageUsername: '{{username}}: ',
+            messageText: '{{text}}',
+          },
+        },
       },
     },
   },

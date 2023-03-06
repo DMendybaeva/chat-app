@@ -33,7 +33,7 @@ export const SignupForm = () => {
           navigate(PATHS.home);
         } catch (e) {
           if (e.response.data.statusCode === 409) {
-            setFieldError('auth', t('forms.signupForm.errors.auth'));
+            setFieldError('auth', t('forms.signupForm.errors.auth', { username: values.username }));
           } else {
             console.log(e.response.data);
           }
