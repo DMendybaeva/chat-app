@@ -100,6 +100,10 @@ const resources = {
         buttonSend: 'Отправить',
         buttonCancel: 'Отменить',
       },
+      navbar: {
+        authButton: 'Выйти',
+        homeLink: 'Hexlet Chat',
+      },
     },
   },
 };
