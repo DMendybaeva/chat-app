@@ -101,12 +101,18 @@ const resources = {
           buttonSend: 'Отправить',
           buttonCancel: 'Отменить',
         },
-      },
-      addChannelModal: {
-        title: 'Добавить канал',
-        label: 'Имя канала',
-        buttonSend: 'Отправить',
-        buttonCancel: 'Отменить',
+        removeChannelModal: {
+          title: 'Удалить канал',
+          body: 'Уверены?',
+          buttonSend: 'Отправить',
+          buttonCancel: 'Отменить',
+        },
+        addChannelModal: {
+          title: 'Добавить канал',
+          label: 'Имя канала',
+          buttonSend: 'Отправить',
+          buttonCancel: 'Отменить',
+        },
       },
       navbar: {
         authButton: 'Выйти',
