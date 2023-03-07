@@ -51,7 +51,7 @@ export const AddChannelModal = ({ handleHide }) => {
               value={formik.values.channelName}
               isInvalid={formik.errors.channelName}
             />
-            <Form.Control.Feedback type="invalid">{formik.errors.channelName}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{t(formik.errors.channelName)}</Form.Control.Feedback>
             <div className="d-flex justify-content-end">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
                 {t('modals.addChannelModal.buttonCancel')}

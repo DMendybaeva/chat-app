@@ -117,6 +117,12 @@ const resources = {
           buttonSend: 'Отправить',
           buttonCancel: 'Отменить',
         },
+        errors: {
+          required: 'Обязательное поле',
+          short: 'От 3 до 20 символов',
+          long: 'От 3 до 20 символов',
+          unique: 'Должно быть уникальным',
+        },
       },
       navbar: {
         authButton: 'Выйти',
