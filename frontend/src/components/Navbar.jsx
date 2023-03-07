@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AuthButton } from './AuthButton';
 import { PATHS } from '../const';
+import { LangSwitcher } from './LangSwitcher';
 
 export const Navbar = () => {
   const { t } = useTranslation();
@@ -13,7 +14,10 @@ export const Navbar = () => {
         <Link className="navbar-brand" to={PATHS.home}>
           {t('navbar.homeLink')}
         </Link>
-        <AuthButton />
+        <div>
+          <LangSwitcher />
+          <AuthButton />
+        </div>
       </div>
     </nav>
   );

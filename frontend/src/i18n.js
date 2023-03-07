@@ -1,19 +1,14 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-
-import { en, ru } from './locales/index';
-
-const resources = {
-  en,
-  ru,
-};
+import Backend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
+  .use(Backend)
+  .use(LanguageDetector)
   .init({
-    resources,
-    lng: 'ru',
-
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
