@@ -94,6 +94,14 @@ const resources = {
           },
         },
       },
+      modals: {
+        renameChannelModal: {
+          title: 'Переименовать канал',
+          label: 'Имя канала',
+          buttonSend: 'Отправить',
+          buttonCancel: 'Отменить',
+        },
+      },
       addChannelModal: {
         title: 'Добавить канал',
         label: 'Имя канала',
