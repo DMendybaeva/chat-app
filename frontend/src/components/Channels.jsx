@@ -1,11 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { setCurrentChannelId } from '../slices/chatsSlice';
 
 const Channels = ({ handleRemove, handleRename }) => {
   const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const handleClick = (channel) => () => {
     dispatch(setCurrentChannelId(channel.id));
   };
@@ -23,7 +26,7 @@ const Channels = ({ handleRemove, handleRename }) => {
               className={classes}
               onClick={handleClick(channel)}
             >
-              {`# ${channel.name}`}
+              {t('pages.homePage.channels.channelName', { channelName: channel.name })}
             </Button>
           </Nav.Item>
         ) : (
@@ -36,10 +39,10 @@ const Channels = ({ handleRemove, handleRename }) => {
             key={channel.id}
           >
             <Dropdown.Item eventKey="1" onClick={handleRemove(channel)}>
-              Удалить
+              {t('pages.homePage.channels.dropdownButtonDelete')}
             </Dropdown.Item>
             <Dropdown.Item eventKey="2" onClick={handleRename(channel)}>
-              Переименовать
+              {t('pages.homePage.channels.dropdownButtonRename')}
             </Dropdown.Item>
           </SplitButton>
         ),

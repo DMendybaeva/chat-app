@@ -33,13 +33,13 @@ export const AddChannelModal = ({ handleHide }) => {
   return (
     <Modal show onHide={handleHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('modals.addChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
             <Form.Label visuallyHidden htmlFor="channelName">
-              Имя канала
+              {t('modals.addChannelModal.label')}
             </Form.Label>
             <Form.Control
               data-testid="input-body"
@@ -51,13 +51,13 @@ export const AddChannelModal = ({ handleHide }) => {
               value={formik.values.channelName}
               isInvalid={formik.errors.channelName}
             />
-            <Form.Control.Feedback type="invalid">{formik.errors.channelName}</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{t(formik.errors.channelName)}</Form.Control.Feedback>
             <div className="d-flex justify-content-end">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
-                Отменить
+                {t('modals.addChannelModal.buttonCancel')}
               </Button>
               <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
-                Отправить
+                {t('modals.addChannelModal.buttonSend')}
               </Button>
             </div>
           </Form.Group>

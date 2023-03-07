@@ -4,10 +4,11 @@ export const getChannelValidationSchema = (channels) =>
   yup.object({
     channelName: yup
       .string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
+      .min(3, 'modals.errors.short')
+      .max(20, 'modals.errors.long')
       .notOneOf(
         channels.map((channel) => channel.name),
-        'Должно быть уникальным',
-      ),
+        'modals.errors.unique',
+      )
+      .required('modals.errors.required'),
   });

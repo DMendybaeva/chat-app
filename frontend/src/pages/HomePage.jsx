@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import { fetchChats } from '../slices/chatsSlice';
 import Channels from '../components/Channels';
@@ -18,6 +19,7 @@ const HomePage = () => {
   const { messages } = useSelector((state) => state.chats);
   const { getAuthHeader, getUserInfo } = useAuth();
   const { newMessage } = useSocket();
+  const { t } = useTranslation();
 
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
   const messagesCount = messages.filter((message) => message.channelId === currentChannelId).length;
@@ -71,7 +73,7 @@ const HomePage = () => {
       <div className="row h-100 bg-white flex-md-row">
         <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
           <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
-            <span>Каналы</span>
+            <span>{t('pages.homePage.channels.channelsTitle')}</span>
             <button type="button" className="p-0 text-primary btn btn-group-vertical" onClick={handleAddTask}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -87,9 +89,11 @@ const HomePage = () => {
           <div className="d-flex flex-column h-100">
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
-                <b># {currentChannel?.name}</b>
+                <b>{t('pages.homePage.channels.currentChannel', { currentChannelName: currentChannel?.name })}</b>
               </p>
-              <span className="text-muted">{messagesCount} сообщения</span>
+              <span className="text-muted">
+                {t('pages.homePage.messages.messagesCount.key', { count: messagesCount, messagesCount })}
+              </span>
             </div>
             <Messages />
             <div className="mt-auto px-5 py-3">
@@ -97,8 +101,8 @@ const HomePage = () => {
                 <div className="input-group has-validation">
                   <input
                     name="text"
-                    aria-label="Новое сообщение"
-                    placeholder="Введите сообщение..."
+                    aria-label={t('pages.homePage.form.label')}
+                    placeholder={t('pages.homePage.form.placeholder')}
                     className="border-0 p-0 ps-2 form-control"
                     value={formik.values.text}
                     onChange={formik.handleChange}
@@ -117,7 +121,7 @@ const HomePage = () => {
                         d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
                       />
                     </svg>
-                    <span className="visually-hidden">Отправить</span>
+                    <span className="visually-hidden">{t('pages.homePage.form.sendMessageButton')}</span>
                   </button>
                 </div>
               </form>
