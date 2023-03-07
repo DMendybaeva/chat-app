@@ -6,8 +6,8 @@ const resources = {
     translation: {
       forms: {
         loginForm: {
-          title: 'Enter',
-          loginButton: 'Enter',
+          title: 'Log in',
+          loginButton: 'Log in',
           footer: {
             accountAbsence: 'No account?',
             registration: 'Sign up',
