@@ -4,9 +4,126 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      'Welcome to React': 'Welcome to React and react-i18next',
+      forms: {
+        loginForm: {
+          title: 'Enter',
+          loginButton: 'Enter',
+          footer: {
+            accountAbsence: 'No account?',
+            registration: 'Sign up',
+          },
+          fields: {
+            username: {
+              label: 'Username',
+              placeholder: 'Username',
+            },
+            password: {
+              label: 'Password',
+              placeholder: 'Password',
+            },
+          },
+          errors: {
+            required: 'Required',
+            auth: 'Invalid username or password',
+          },
+        },
+        signupForm: {
+          title: 'Registration',
+          signupButton: 'Sign up',
+          fields: {
+            username: {
+              label: 'Username',
+              placeholder: 'Username',
+              errors: {
+                short: 'From 3 to 20 characters',
+                long: 'From 3 to 20 characters',
+              },
+            },
+            password: {
+              label: 'Password',
+              placeholder: 'Password',
+              errors: {
+                short: 'At least 6 characters',
+              },
+            },
+            repeatedPassword: {
+              label: 'Confirm password',
+              placeholder: 'Confirm password',
+              errors: {
+                notMatch: 'Passwords must match',
+              },
+            },
+          },
+          errors: {
+            required: 'Required',
+            auth: "User with name '{{ username }}' already exists",
+          },
+        },
+      },
+      pages: {
+        notFoundPage: {
+          notFound: 'Page not found',
+          go: 'Alternatively, you can visit the ',
+          homeLink: 'Main Page',
+        },
+        homePage: {
+          form: {
+            sendMessageButton: 'Send',
+            label: 'New message',
+            placeholder: 'Enter your message...',
+          },
+          channels: {
+            channelsTitle: 'Channels',
+            currentChannel: '# {{ currentChannelName }}',
+            channelName: '# {{channelName}}',
+            dropdownButtonDelete: 'Delete',
+            dropdownButtonRename: 'Rename',
+          },
+          messages: {
+            messagesCount: {
+              key_zero: '{{messagesCount}} message',
+              key_one: '{{messagesCount}} message',
+              key_many: '{{messagesCount}} messages',
+              key_other: '{{messagesCount}} messages',
+            },
+            messageUsername: '{{username}}: ',
+            messageText: '{{text}}',
+          },
+        },
+      },
+      modals: {
+        renameChannelModal: {
+          title: 'Rename channel',
+          label: 'Channel name',
+          buttonSend: 'Send',
+          buttonCancel: 'Сancel',
+        },
+        removeChannelModal: {
+          title: 'Delete channel',
+          body: 'Are you sure?',
+          buttonSend: 'Send',
+          buttonCancel: 'Сancel',
+        },
+        addChannelModal: {
+          title: 'Add channel',
+          label: 'Channel name',
+          buttonSend: 'Send',
+          buttonCancel: 'Сancel',
+        },
+        errors: {
+          required: 'Required',
+          short: 'From 3 to 20 characters',
+          long: 'From 3 to 20 characters',
+          unique: 'Must be unique',
+        },
+      },
+      navbar: {
+        authButton: 'Sign out',
+        homeLink: 'Hexlet Chat',
+      },
     },
   },
+
   ru: {
     translation: {
       forms: {
@@ -136,11 +253,12 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: 'ru',
+    lng: 'en',
 
     interpolation: {
       escapeValue: false,
     },
+    debug: true,
   });
 
 export default i18n;
