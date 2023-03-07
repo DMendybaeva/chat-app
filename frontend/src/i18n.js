@@ -72,6 +72,11 @@ const resources = {
           homeLink: 'на главную страницу',
         },
         homePage: {
+          form: {
+            sendMessageButton: 'Отправить',
+            label: 'Новое сообщение',
+            placeholder: 'Введите сообщение...',
+          },
           channels: {
             channelsTitle: 'Каналы',
             currentChannel: '# {{ currentChannelName }}',
@@ -80,7 +85,6 @@ const resources = {
             dropdownButtonRename: 'Переименовать',
           },
           messages: {
-            sendMessageButton: 'Отправить',
             messagesCount: {
               key_zero: '{{messagesCount}} сообщений',
               key_one: '{{messagesCount}} сообщение',
