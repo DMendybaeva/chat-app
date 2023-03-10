@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 
 import { useSocket } from '../providers/SocketProvider';
 import { getChannelValidationSchema } from '../validation/getChannelValidationSchema';
@@ -24,7 +25,7 @@ export const AddChannelModal = ({ handleHide }) => {
     },
     validationSchema: getChannelValidationSchema(channels),
     onSubmit: (values) => {
-      const channel = { name: values.channelName };
+      const channel = { name: filter.clean(values.channelName) };
       newChannel(channel);
       showSuccessToast(t('toasts.newChannel'));
       formik.resetForm();
