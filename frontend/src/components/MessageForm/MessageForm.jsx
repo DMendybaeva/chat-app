@@ -2,25 +2,26 @@ import { useFormik } from 'formik';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import filter from 'leo-profanity';
 
 import { useSocket } from '../../providers/SocketProvider';
-
 import { useAuth } from '../../providers/AuthProvider/useAuth';
+import { getMessageValidation } from '../../validation/getMessageValidation';
 
 export const MessageForm = () => {
   const { t } = useTranslation();
   const { newMessage } = useSocket();
   const { getUserInfo } = useAuth();
-
   const { currentChannelId } = useSelector((state) => state.chats);
 
   const formik = useFormik({
     initialValues: {
       text: '',
     },
+    validationSchema: getMessageValidation(),
     onSubmit: ({ text }) => {
       const { username } = getUserInfo();
-      const message = { channelId: currentChannelId, text, username };
+      const message = { channelId: currentChannelId, text: filter.clean(text), username };
       newMessage(message);
       formik.resetForm();
     },

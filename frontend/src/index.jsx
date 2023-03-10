@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import io from 'socket.io-client';
 import './i18n';
+import filter from 'leo-profanity';
 
 import App from './App';
 import store from './slices/index';
@@ -12,6 +13,9 @@ import { AuthProvider } from './providers/AuthProvider/index';
 import { SocketProvider } from './providers/SocketProvider';
 
 const socket = io();
+
+filter.add(filter.getDictionary('ru'));
+filter.add(filter.getDictionary('en'));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
