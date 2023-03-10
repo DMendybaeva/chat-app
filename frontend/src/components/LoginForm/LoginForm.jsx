@@ -9,6 +9,7 @@ import { PATHS } from '../../const';
 import { UsernameInput } from './UsernameInput';
 import { PasswordInput } from './PasswordInput';
 import { useAuth } from '../../providers/AuthProvider/index';
+import { showErrorToast } from '../../helpers/showToast';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -30,10 +31,10 @@ export const LoginForm = () => {
           auth.logIn();
           navigate(PATHS.home);
         } catch (e) {
-          if (e.response.data.statusCode === 401) {
+          if (e?.response?.data?.statusCode === 401) {
             setFieldError('auth', t('forms.loginForm.errors.auth'));
           } else {
-            console.log(e.response.data);
+            showErrorToast(t('toasts.error'));
           }
         }
       }}

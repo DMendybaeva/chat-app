@@ -116,5 +116,11 @@
     "authButton": "Sign out",
     "homeLink": "Hexlet Chat",
     "langSwitcherButton": "English"
+  },
+  "toasts": {
+    "error": "Network error",
+    "newChannel": "New Channel has added",
+    "rename": "Channel has renamed",
+    "remove": "Channel has removed"
   }
 }

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useSocket } from '../providers/SocketProvider';
 import { getChannelValidationSchema } from '../validation/getChannelValidationSchema';
+import { showSuccessToast } from '../helpers/showToast';
 
 export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
@@ -25,6 +26,7 @@ export const AddChannelModal = ({ handleHide }) => {
     onSubmit: (values) => {
       const channel = { name: values.channelName };
       newChannel(channel);
+      showSuccessToast(t('toasts.newChannel'));
       formik.resetForm();
       handleHide();
     },

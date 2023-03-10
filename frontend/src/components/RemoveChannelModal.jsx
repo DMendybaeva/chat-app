@@ -2,6 +2,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { useSocket } from '../providers/SocketProvider';
+import { showSuccessToast } from '../helpers/showToast';
 
 export const RemoveChannelModal = ({ modalInfo, handleHide }) => {
   const { removeChannel } = useSocket();
@@ -11,6 +12,7 @@ export const RemoveChannelModal = ({ modalInfo, handleHide }) => {
   const handleClick = (e) => {
     e.preventDefault();
     removeChannel(channel);
+    showSuccessToast(t('toasts.remove'));
     handleHide();
   };
 

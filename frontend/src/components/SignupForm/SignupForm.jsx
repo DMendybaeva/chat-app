@@ -10,6 +10,7 @@ import { PATHS } from '../../const';
 import { UsernameInput } from './UsernameInput';
 import { PasswordInput } from './PasswordInput';
 import { RepeatedPassword } from './RepeatedPassword';
+import { showErrorToast } from '../../helpers/showToast';
 
 export const SignupForm = () => {
   const auth = useAuth();
@@ -32,10 +33,10 @@ export const SignupForm = () => {
           auth.logIn();
           navigate(PATHS.home);
         } catch (e) {
-          if (e.response.data.statusCode === 409) {
+          if (e?.response?.data?.statusCode === 409) {
             setFieldError('auth', t('forms.signupForm.errors.auth', { username: values.username }));
           } else {
-            console.log(e.response.data);
+            showErrorToast(t('toasts.error'));
           }
         }
       }}
