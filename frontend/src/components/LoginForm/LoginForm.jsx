@@ -34,7 +34,7 @@ export const LoginForm = () => {
           if (e?.response?.data?.statusCode === 401) {
             setFieldError('auth', t('forms.loginForm.errors.auth'));
           } else {
-            showErrorToast();
+            showErrorToast(t('toasts.error'));
           }
         }
       }}

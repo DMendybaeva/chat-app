@@ -1,9 +1,8 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import i18n from 'i18next';
 
-export const showErrorToast = () =>
-  toast.error(i18n.t('toasts.error'), {
+export const showErrorToast = (text) =>
+  toast.error(text, {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,

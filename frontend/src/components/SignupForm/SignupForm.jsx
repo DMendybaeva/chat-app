@@ -36,7 +36,7 @@ export const SignupForm = () => {
           if (e?.response?.data?.statusCode === 409) {
             setFieldError('auth', t('forms.signupForm.errors.auth', { username: values.username }));
           } else {
-            showErrorToast();
+            showErrorToast(t('toasts.error'));
           }
         }
       }}
