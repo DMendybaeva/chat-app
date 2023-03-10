@@ -1,8 +1,9 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import i18n from 'i18next';
 
 export const showErrorToast = () =>
-  toast.error('Ошибка соединения', {
+  toast.error(i18n.t('toasts.error'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -14,7 +15,7 @@ export const showErrorToast = () =>
   });
 
 export const showNewChannelToast = () =>
-  toast.success('Канал создан', {
+  toast.success(i18n.t('toasts.newChannel'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -26,7 +27,7 @@ export const showNewChannelToast = () =>
   });
 
 export const showRenameChannelToast = () =>
-  toast.success('Канал переименован', {
+  toast.success(i18n.t('toasts.rename'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
@@ -38,7 +39,7 @@ export const showRenameChannelToast = () =>
   });
 
 export const showRemoveChannelToast = () =>
-  toast.success('Канал удален', {
+  toast.success(i18n.t('toasts.remove'), {
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,

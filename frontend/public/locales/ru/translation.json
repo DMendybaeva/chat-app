@@ -118,5 +118,11 @@
     "authButton": "Выйти",
     "homeLink": "Hexlet Chat",
     "langSwitcherButton": "Русский"
+  },
+  "toasts": {
+    "error": "Ошибка соединения",
+    "newChannel": "Канал создан",
+    "rename": "Канал переименован",
+    "remove": "Канал удален"
   }
 }
