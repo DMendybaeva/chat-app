@@ -3,8 +3,6 @@ import { Formik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { getLoginValidation } from '../../validation/getLoginValidation';
 import { PATHS } from '../../const';
@@ -49,7 +47,6 @@ export const LoginForm = () => {
           <Button variant="outline-primary" type="submit" className="w-100">
             {t('forms.loginForm.loginButton')}
           </Button>
-          <ToastContainer />
         </Form>
       )}
     </Formik>

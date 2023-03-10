@@ -3,8 +3,6 @@ import { Formik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { getNewUserValidation } from '../../validation/getNewUserValidation';
 import { useAuth } from '../../providers/AuthProvider/index';
@@ -52,7 +50,6 @@ export const SignupForm = () => {
           <Button variant="outline-primary" type="submit" className="w-100">
             {t('forms.signupForm.signupButton')}
           </Button>
-          <ToastContainer />
         </Form>
       )}
     </Formik>
