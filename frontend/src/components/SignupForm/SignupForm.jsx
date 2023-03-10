@@ -3,6 +3,8 @@ import { Formik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { getNewUserValidation } from '../../validation/getNewUserValidation';
 import { useAuth } from '../../providers/AuthProvider/index';
@@ -10,6 +12,7 @@ import { PATHS } from '../../const';
 import { UsernameInput } from './UsernameInput';
 import { PasswordInput } from './PasswordInput';
 import { RepeatedPassword } from './RepeatedPassword';
+import { showErrorToast } from '../../helpers/showToast';
 
 export const SignupForm = () => {
   const auth = useAuth();
@@ -32,10 +35,10 @@ export const SignupForm = () => {
           auth.logIn();
           navigate(PATHS.home);
         } catch (e) {
-          if (e.response.data.statusCode === 409) {
+          if (e?.response?.data?.statusCode === 409) {
             setFieldError('auth', t('forms.signupForm.errors.auth', { username: values.username }));
           } else {
-            console.log(e.response.data);
+            showErrorToast();
           }
         }
       }}
@@ -49,6 +52,7 @@ export const SignupForm = () => {
           <Button variant="outline-primary" type="submit" className="w-100">
             {t('forms.signupForm.signupButton')}
           </Button>
+          <ToastContainer />
         </Form>
       )}
     </Formik>

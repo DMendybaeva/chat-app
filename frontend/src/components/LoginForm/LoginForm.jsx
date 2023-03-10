@@ -3,12 +3,15 @@ import { Formik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { getLoginValidation } from '../../validation/getLoginValidation';
 import { PATHS } from '../../const';
 import { UsernameInput } from './UsernameInput';
 import { PasswordInput } from './PasswordInput';
 import { useAuth } from '../../providers/AuthProvider/index';
+import { showErrorToast } from '../../helpers/showToast';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -30,10 +33,10 @@ export const LoginForm = () => {
           auth.logIn();
           navigate(PATHS.home);
         } catch (e) {
-          if (e.response.data.statusCode === 401) {
+          if (e?.response?.data?.statusCode === 401) {
             setFieldError('auth', t('forms.loginForm.errors.auth'));
           } else {
-            console.log(e.response.data);
+            showErrorToast();
           }
         }
       }}
@@ -46,6 +49,7 @@ export const LoginForm = () => {
           <Button variant="outline-primary" type="submit" className="w-100">
             {t('forms.loginForm.loginButton')}
           </Button>
+          <ToastContainer />
         </Form>
       )}
     </Formik>
