@@ -53,6 +53,11 @@
         "required": "Required",
         "auth": "User with name '{{ username }}' already exists"
       }
+    },
+    "messageForm": {
+      "sendMessageButton": "Send",
+      "label": "New message",
+      "placeholder": "Enter your message..."
     }
   },
   "pages": {
@@ -62,11 +67,6 @@
       "homeLink": "Main Page"
     },
     "homePage": {
-      "form": {
-        "sendMessageButton": "Send",
-        "label": "New message",
-        "placeholder": "Enter your message..."
-      },
       "channels": {
         "channelsTitle": "Channels",
         "currentChannel": "# {{ currentChannelName }}",
