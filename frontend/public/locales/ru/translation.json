@@ -53,6 +53,11 @@
         "required": "Обязательное поле",
         "auth": "Пользователь с именем '{{ username }}' уже существует"
       }
+    },
+    "messageForm": {
+      "sendMessageButton": "Отправить",
+      "label": "Новое сообщение",
+      "placeholder": "Введите сообщение..."
     }
   },
   "pages": {
@@ -62,11 +67,6 @@
       "homeLink": "на главную страницу"
     },
     "homePage": {
-      "form": {
-        "sendMessageButton": "Отправить",
-        "label": "Новое сообщение",
-        "placeholder": "Введите сообщение..."
-      },
       "channels": {
         "channelsTitle": "Каналы",
         "currentChannel": "# {{ currentChannelName }}",

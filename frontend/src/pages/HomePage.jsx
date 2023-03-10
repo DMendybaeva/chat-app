@@ -1,24 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-import { useFormik } from 'formik';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { fetchChats } from '../slices/chatsSlice';
 import Channels from '../components/Channels';
 import Messages from '../components/Messages';
 import { useAuth } from '../providers/AuthProvider/useAuth';
-import { useSocket } from '../providers/SocketProvider';
 import { getModal } from '../helpers/getModal';
+import { MessageForm } from '../components/MessageForm/MessageForm';
 
 const HomePage = () => {
   const [modalInfo, setModalInfo] = useState({ modalType: null, modalChannel: null }); // { modalType: 'add'||'remove'||'rename' , channel: id }
 
   const dispatch = useDispatch();
-  const inputEl = useRef();
   const { currentChannelId, channels } = useSelector((state) => state.chats);
   const { messages } = useSelector((state) => state.chats);
-  const { getAuthHeader, getUserInfo } = useAuth();
-  const { newMessage } = useSocket();
+  const { getAuthHeader } = useAuth();
   const { t } = useTranslation();
 
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
@@ -53,27 +50,14 @@ const HomePage = () => {
   useEffect(() => {
     const headers = getAuthHeader();
     dispatch(fetchChats(headers));
-    inputEl.current.focus();
   }, []);
-
-  const formik = useFormik({
-    initialValues: {
-      text: '',
-    },
-    onSubmit: ({ text }) => {
-      const { username } = getUserInfo();
-      const message = { channelId: currentChannelId, text, username };
-      newMessage(message);
-      formik.resetForm();
-    },
-  });
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
-          <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
-            <span>{t('pages.homePage.channels.channelsTitle')}</span>
+        <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
+          <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
+            <b>{t('pages.homePage.channels.channelsTitle')}</b>
             <button type="button" className="p-0 text-primary btn btn-group-vertical" onClick={handleAddTask}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -97,34 +81,7 @@ const HomePage = () => {
             </div>
             <Messages />
             <div className="mt-auto px-5 py-3">
-              <form noValidate="" className="py-1 border rounded-2" onSubmit={formik.handleSubmit}>
-                <div className="input-group has-validation">
-                  <input
-                    name="text"
-                    aria-label={t('pages.homePage.form.label')}
-                    placeholder={t('pages.homePage.form.placeholder')}
-                    className="border-0 p-0 ps-2 form-control"
-                    value={formik.values.text}
-                    onChange={formik.handleChange}
-                    ref={inputEl}
-                  />
-                  <button type="submit" disabled="" className="btn btn-group-vertical">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 16 16"
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
-                      />
-                    </svg>
-                    <span className="visually-hidden">{t('pages.homePage.form.sendMessageButton')}</span>
-                  </button>
-                </div>
-              </form>
+              <MessageForm />
             </div>
           </div>
         </div>
