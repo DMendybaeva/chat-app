@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { setCurrentChannelId } from '../slices/chatsSlice';
+import { setCurrentChannelId } from '../store/chatsSlice';
 
 const Channels = ({ handleRemove, handleRename }) => {
   const { channels } = useSelector((state) => state.chats);

@@ -6,6 +6,8 @@ const initialState = {
   channels: [], // {name, id, removable}
   messages: [], // {text, author, channelId, id}
   currentChannelId: null,
+  isLoading: false,
+  error: null,
 };
 
 export const fetchChats = createAsyncThunk('data/fetchChats', async (headers) => {
@@ -41,11 +43,20 @@ const chatsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchChats.fulfilled, (state, action) => {
-      state.channels = action.payload.channels;
-      state.messages = action.payload.messages;
-      state.currentChannelId = action.payload.currentChannelId;
-    });
+    builder
+      .addCase(fetchChats.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.channels = action.payload.channels;
+        state.messages = action.payload.messages;
+        state.currentChannelId = action.payload.currentChannelId;
+      })
+      .addCase(fetchChats.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchChats.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.isLoading = false;
+      });
   },
 });
 

@@ -1,19 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Spinner from 'react-bootstrap/Spinner';
 
-import { fetchChats } from '../slices/chatsSlice';
+import { fetchChats } from '../store/chatsSlice';
 import Channels from '../components/Channels';
 import Messages from '../components/Messages';
 import { useAuth } from '../providers/AuthProvider/useAuth';
 import { getModal } from '../helpers/getModal';
 import { MessageForm } from '../components/MessageForm/MessageForm';
+import { showErrorToast } from '../helpers/showToast';
 
 const HomePage = () => {
   const [modalInfo, setModalInfo] = useState({ modalType: null, modalChannel: null }); // { modalType: 'add'||'remove'||'rename' , channel: id }
 
   const dispatch = useDispatch();
-  const { currentChannelId, channels } = useSelector((state) => state.chats);
+  const { currentChannelId, channels, isLoading, error } = useSelector((state) => state.chats);
   const { messages } = useSelector((state) => state.chats);
   const { getAuthHeader } = useAuth();
   const { t } = useTranslation();
@@ -50,7 +52,21 @@ const HomePage = () => {
   useEffect(() => {
     const headers = getAuthHeader();
     dispatch(fetchChats(headers));
-  }, []);
+  }, [dispatch, getAuthHeader]);
+
+  useEffect(() => {
+    if (error) {
+      showErrorToast(error);
+    }
+  }, [error]);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center flex-column vh-100">
+        <Spinner animation="border" />
+      </div>
+    );
+  }
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
