@@ -122,5 +122,10 @@
     "newChannel": "New Channel has added",
     "rename": "Channel has renamed",
     "remove": "Channel has removed"
+  },
+  "errorPageContent": {
+    "header": "Something went wrong",
+    "body": "Try to reload page",
+    "reloadButton": "Click to reload"
   }
 }

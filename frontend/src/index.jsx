@@ -11,6 +11,7 @@ import App from './App';
 import store from './slices/index';
 import { AuthProvider } from './providers/AuthProvider/index';
 import { SocketProvider } from './providers/SocketProvider';
+import { ErrorBoundary } from './ErrorBoundary';
 
 const socket = io();
 
@@ -20,14 +21,16 @@ filter.add(filter.getDictionary('en'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <SocketProvider socket={socket}>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </SocketProvider>
-      </Provider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Provider store={store}>
+          <SocketProvider socket={socket}>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </SocketProvider>
+        </Provider>
+      </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>,
 );
