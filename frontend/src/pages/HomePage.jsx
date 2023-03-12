@@ -1,56 +1,63 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Spinner from 'react-bootstrap/Spinner';
 
-import { fetchChats } from '../slices/chatsSlice';
+import { fetchChats } from '../store/chatsSlice';
 import Channels from '../components/Channels';
 import Messages from '../components/Messages';
 import { useAuth } from '../providers/AuthProvider/useAuth';
-import { getModal } from '../helpers/getModal';
 import { MessageForm } from '../components/MessageForm/MessageForm';
+import { showErrorToast } from '../helpers/showToast';
+import { add, hide, remove, rename } from '../store/modalsSlice';
+import { Modal } from '../components/Modals/Modal';
 
 const HomePage = () => {
-  const [modalInfo, setModalInfo] = useState({ modalType: null, modalChannel: null }); // { modalType: 'add'||'remove'||'rename' , channel: id }
-
   const dispatch = useDispatch();
-  const { currentChannelId, channels } = useSelector((state) => state.chats);
-  const { messages } = useSelector((state) => state.chats);
+
+  const modalInfo = useSelector((state) => state.modals);
+  const { currentChannelId, channels, isLoading, error, messages } = useSelector((state) => state.chats);
+
   const { getAuthHeader } = useAuth();
   const { t } = useTranslation();
 
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
   const messagesCount = messages.filter((message) => message.channelId === currentChannelId).length;
 
-  const renderModal = (props) => {
-    if (!props.modalInfo.modalType) {
-      return null;
-    }
-
-    const Modal = getModal(props.modalInfo.modalType);
-
-    return <Modal modalInfo={props.modalInfo} handleHide={props.handleHide} handleRemove={props.handleRemove} />;
-  };
-
   const handleAddTask = () => {
-    setModalInfo({ modalType: 'adding', currentChannel: null });
+    dispatch(add());
   };
 
   const handleHide = () => {
-    setModalInfo({ modalType: null, modalChannel: null });
+    dispatch(hide());
   };
 
   const handleRemove = (channel) => () => {
-    setModalInfo({ modalType: 'removing', modalChannel: channel });
+    dispatch(remove(channel));
   };
 
   const handleRename = (channel) => () => {
-    setModalInfo({ modalType: 'renaming', modalChannel: channel });
+    dispatch(rename(channel));
   };
 
   useEffect(() => {
     const headers = getAuthHeader();
     dispatch(fetchChats(headers));
-  }, []);
+  }, [dispatch, getAuthHeader]);
+
+  useEffect(() => {
+    if (error) {
+      showErrorToast(error);
+    }
+  }, [error]);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center flex-column vh-100">
+        <Spinner animation="border" />
+      </div>
+    );
+  }
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
@@ -65,7 +72,7 @@ const HomePage = () => {
               </svg>
               <span className="visually-hidden">+</span>
             </button>
-            {renderModal({ modalInfo, handleHide })}
+            <Modal modalInfo={modalInfo} handleHide={handleHide} handleRemove={handleRemove} />
           </div>
           <Channels handleRemove={handleRemove} handleRename={handleRename} />
         </div>

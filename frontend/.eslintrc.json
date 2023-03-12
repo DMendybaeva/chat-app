@@ -8,6 +8,7 @@
     "airbnb",
     "plugin:react/jsx-runtime",
     "plugin:i18next/recommended",
+    "plugin:react-hooks/recommended",
     "prettier"
   ],
   "overrides": [],

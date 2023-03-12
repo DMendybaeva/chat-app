@@ -5,12 +5,12 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 
-import { useSocket } from '../providers/SocketProvider';
-import { getChannelValidationSchema } from '../validation/getChannelValidationSchema';
-import { showSuccessToast } from '../helpers/showToast';
+import { useSocket } from '../../providers/SocketProvider';
+import { getChannelValidationSchema } from '../../validation/getChannelValidationSchema';
+import { showSuccessToast } from '../../helpers/showToast';
 
-export const AddChannelModal = ({ handleHide }) => {
-  const { newChannel } = useSocket();
+export const RenameChannelModal = ({ modalInfo, handleHide }) => {
+  const { renameChannel } = useSocket();
   const { channels } = useSelector((state) => state.chats);
   const inputEl = useRef(null);
   const { t } = useTranslation();
@@ -21,13 +21,13 @@ export const AddChannelModal = ({ handleHide }) => {
 
   const formik = useFormik({
     initialValues: {
-      channelName: '',
+      channelName: modalInfo.modalChannel.name,
     },
     validationSchema: getChannelValidationSchema(channels),
     onSubmit: (values) => {
-      const channel = { name: filter.clean(values.channelName) };
-      newChannel(channel);
-      showSuccessToast(t('toasts.newChannel'));
+      const newChannel = { id: modalInfo.modalChannel.id, name: filter.clean(values.channelName) };
+      renameChannel(newChannel);
+      showSuccessToast(t('toasts.rename'));
       formik.resetForm();
       handleHide();
     },
@@ -36,14 +36,11 @@ export const AddChannelModal = ({ handleHide }) => {
   return (
     <Modal show onHide={handleHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t('modals.addChannelModal.title')}</Modal.Title>
+        <Modal.Title>{t('modals.renameChannelModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label visuallyHidden htmlFor="channelName">
-              {t('modals.addChannelModal.label')}
-            </Form.Label>
             <Form.Control
               data-testid="input-body"
               id="channelName"
@@ -55,12 +52,16 @@ export const AddChannelModal = ({ handleHide }) => {
               isInvalid={formik.errors.channelName}
             />
             <Form.Control.Feedback type="invalid">{t(formik.errors.channelName)}</Form.Control.Feedback>
+            <Form.Label visuallyHidden htmlFor="channelName">
+              {t('modals.renameChannelModal.label')}
+            </Form.Label>
+            <div className="invalid-feedback" />
             <div className="d-flex justify-content-end">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
-                {t('modals.addChannelModal.buttonCancel')}
+                {t('modals.renameChannelModal.buttonCancel')}
               </Button>
               <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
-                {t('modals.addChannelModal.buttonSend')}
+                {t('modals.renameChannelModal.buttonSend')}
               </Button>
             </div>
           </Form.Group>

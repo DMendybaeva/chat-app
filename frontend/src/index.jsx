@@ -8,7 +8,7 @@ import './i18n';
 import filter from 'leo-profanity';
 
 import App from './App';
-import store from './slices/index';
+import store from './store/index';
 import { AuthProvider } from './providers/AuthProvider/index';
 import { SocketProvider } from './providers/SocketProvider';
 import { ErrorBoundary } from './ErrorBoundary';

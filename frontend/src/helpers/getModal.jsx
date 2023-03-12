@@ -1,6 +1,6 @@
-import { AddChannelModal } from '../components/AddChannelModal';
-import { RemoveChannelModal } from '../components/RemoveChannelModal';
-import { RenameChannelModal } from '../components/RenameChannelModal';
+import { AddChannelModal } from '../components/Modals/AddChannelModal';
+import { RemoveChannelModal } from '../components/Modals/RemoveChannelModal';
+import { RenameChannelModal } from '../components/Modals/RenameChannelModal';
 
 const modals = {
   adding: AddChannelModal,
