@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -10,13 +10,14 @@ import { useAuth } from '../providers/AuthProvider/useAuth';
 import { getModal } from '../helpers/getModal';
 import { MessageForm } from '../components/MessageForm/MessageForm';
 import { showErrorToast } from '../helpers/showToast';
+import { add, hide, remove, rename } from '../store/modalsSlice';
 
 const HomePage = () => {
-  const [modalInfo, setModalInfo] = useState({ modalType: null, modalChannel: null }); // { modalType: 'add'||'remove'||'rename' , channel: id }
-
   const dispatch = useDispatch();
-  const { currentChannelId, channels, isLoading, error } = useSelector((state) => state.chats);
-  const { messages } = useSelector((state) => state.chats);
+
+  const modalInfo = useSelector((state) => state.modals);
+  const { currentChannelId, channels, isLoading, error, messages } = useSelector((state) => state.chats);
+
   const { getAuthHeader } = useAuth();
   const { t } = useTranslation();
 
@@ -34,19 +35,19 @@ const HomePage = () => {
   };
 
   const handleAddTask = () => {
-    setModalInfo({ modalType: 'adding', currentChannel: null });
+    dispatch(add());
   };
 
   const handleHide = () => {
-    setModalInfo({ modalType: null, modalChannel: null });
+    dispatch(hide());
   };
 
   const handleRemove = (channel) => () => {
-    setModalInfo({ modalType: 'removing', modalChannel: channel });
+    dispatch(remove(channel));
   };
 
   const handleRename = (channel) => () => {
-    setModalInfo({ modalType: 'renaming', modalChannel: channel });
+    dispatch(rename(channel));
   };
 
   useEffect(() => {
