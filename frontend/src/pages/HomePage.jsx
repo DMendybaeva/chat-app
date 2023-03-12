@@ -7,10 +7,10 @@ import { fetchChats } from '../store/chatsSlice';
 import Channels from '../components/Channels';
 import Messages from '../components/Messages';
 import { useAuth } from '../providers/AuthProvider/useAuth';
-import { getModal } from '../helpers/getModal';
 import { MessageForm } from '../components/MessageForm/MessageForm';
 import { showErrorToast } from '../helpers/showToast';
 import { add, hide, remove, rename } from '../store/modalsSlice';
+import { Modal } from '../components/Modals/Modal';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,16 +23,6 @@ const HomePage = () => {
 
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
   const messagesCount = messages.filter((message) => message.channelId === currentChannelId).length;
-
-  const renderModal = (props) => {
-    if (!props.modalInfo.modalType) {
-      return null;
-    }
-
-    const Modal = getModal(props.modalInfo.modalType);
-
-    return <Modal modalInfo={props.modalInfo} handleHide={props.handleHide} handleRemove={props.handleRemove} />;
-  };
 
   const handleAddTask = () => {
     dispatch(add());
@@ -82,7 +72,7 @@ const HomePage = () => {
               </svg>
               <span className="visually-hidden">+</span>
             </button>
-            {renderModal({ modalInfo, handleHide })}
+            <Modal modalInfo={modalInfo} handleHide={handleHide} handleRemove={handleRemove} />
           </div>
           <Channels handleRemove={handleRemove} handleRename={handleRename} />
         </div>
