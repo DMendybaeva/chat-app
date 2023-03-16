@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addMessage, addChannel, removeChannel, renameChannel } from '../../slices/chatsSlice';
+import { addMessage, addChannel, removeChannel, renameChannel } from '../../store/chatsSlice';
 import { SocketContext } from './SocketContext';
 
 export const SocketProvider = ({ children, socket }) => {
@@ -13,7 +13,7 @@ export const SocketProvider = ({ children, socket }) => {
       removeChannel: (channel) => socket.volatile.emit('removeChannel', channel),
       renameChannel: (channel) => socket.volatile.emit('renameChannel', channel),
     }),
-    [addMessage, addChannel, removeChannel, renameChannel],
+    [socket.volatile],
   );
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const SocketProvider = ({ children, socket }) => {
       socket.off('removeChannel');
       socket.off('renameChannel');
     };
-  }, []);
+  }, [dispath, socket]);
 
   return <SocketContext.Provider value={values}>{children}</SocketContext.Provider>;
 };
