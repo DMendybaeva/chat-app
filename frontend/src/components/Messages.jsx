@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-const Messages = () => {
+export const Messages = () => {
   const { messages } = useSelector((state) => state.chats);
   const { currentChannelId } = useSelector((state) => state.chats);
   const { t } = useTranslation();
@@ -19,4 +19,3 @@ const Messages = () => {
     </div>
   );
 };
-export default Messages;

@@ -6,7 +6,7 @@ import { Navbar } from './components/Navbar';
 import { Layout } from './components/Layout';
 import { routes } from './routes';
 
-const App = () => (
+export const App = () => (
   <Layout>
     <Navbar />
     <ToastContainer />
@@ -17,5 +17,3 @@ const App = () => (
     </Routes>
   </Layout>
 );
-
-export default App;

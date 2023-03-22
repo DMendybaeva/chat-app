@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import imgSrc from '../assets/signup.jpg';
 import { SignupForm } from '../components/SignupForm/index';
 
-const SignupPage = () => {
+export const SignupPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -20,5 +20,3 @@ const SignupPage = () => {
     </div>
   );
 };
-
-export default SignupPage;

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import Messages from '../Messages';
+import { Messages } from '../Messages';
 import { MessageForm } from '../MessageForm/MessageForm';
 
 export const MessagesBar = () => {

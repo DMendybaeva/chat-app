@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { add, hide, remove, rename } from '../../store/modalsSlice';
 import { Modal } from '../Modals/Modal';
-import Channels from '../Channels';
+import { Channels } from '../Channels';
 
 export const ChannelsBar = () => {
   const dispatch = useDispatch();

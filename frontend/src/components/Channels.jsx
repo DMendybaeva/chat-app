@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { setCurrentChannelId } from '../store/chatsSlice';
 
-const Channels = ({ handleRemove, handleRename }) => {
+export const Channels = ({ handleRemove, handleRename }) => {
   const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -50,4 +50,3 @@ const Channels = ({ handleRemove, handleRename }) => {
     </Nav>
   );
 };
-export default Channels;

@@ -8,7 +8,7 @@ import { showErrorToast } from '../helpers/showToast';
 import { ChannelsBar } from '../components/HomePageBars/ChannelsBar';
 import { MessagesBar } from '../components/HomePageBars/MessagesBar';
 
-const HomePage = () => {
+export const HomePage = () => {
   const dispatch = useDispatch();
 
   const { isLoading, error } = useSelector((state) => state.chats);
@@ -43,5 +43,3 @@ const HomePage = () => {
     </div>
   );
 };
-
-export default HomePage;

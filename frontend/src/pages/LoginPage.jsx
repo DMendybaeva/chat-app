@@ -3,7 +3,7 @@ import imgSrc from '../assets/login.jpg';
 import { LoginForm } from '../components/LoginForm/index';
 import { PATHS } from '../const';
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -29,5 +29,3 @@ const LoginPage = () => {
     </div>
   );
 };
-
-export default LoginPage;
