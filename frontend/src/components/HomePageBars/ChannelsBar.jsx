@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { add, hide, remove, rename } from '../../store/modalsSlice';
+import { add, hide } from '../../store/modalsSlice';
 import { Modal } from '../Modals/Modal';
 import { Channels } from '../Channels';
 
@@ -18,14 +18,6 @@ export const ChannelsBar = () => {
     dispatch(hide());
   };
 
-  const handleRemove = (channel) => () => {
-    dispatch(remove(channel));
-  };
-
-  const handleRename = (channel) => () => {
-    dispatch(rename(channel));
-  };
-
   return (
     <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
@@ -37,9 +29,9 @@ export const ChannelsBar = () => {
           </svg>
           <span className="visually-hidden">+</span>
         </button>
-        <Modal modalInfo={modalInfo} handleHide={handleHide} handleRemove={handleRemove} />
+        <Modal modalInfo={modalInfo} handleHide={handleHide} />
       </div>
-      <Channels handleRemove={handleRemove} handleRename={handleRename} />
+      <Channels />
     </div>
   );
 };
