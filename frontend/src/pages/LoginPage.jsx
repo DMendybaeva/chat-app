@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import imgSrc from '../assets/login.jpg';
 import { LoginForm } from '../components/LoginForm/index';
-import { PATHS } from '../const';
 import { SignupLoginLayout } from '../components/SignupLoginLayout';
+import { LoginFooter } from '../components/LoginFooter';
 
 export const LoginPage = () => {
   const { t } = useTranslation();
@@ -15,12 +15,7 @@ export const LoginPage = () => {
         </div>
         <LoginForm />
       </div>
-      <div className="card-footer p-4">
-        <div className="text-center">
-          <span>{t('forms.loginForm.footer.accountAbsence')}</span>
-          <a href={PATHS.signup}>{t('forms.loginForm.footer.registration')}</a>
-        </div>
-      </div>
+      <LoginFooter />
     </SignupLoginLayout>
   );
 };
