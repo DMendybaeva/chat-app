@@ -4,7 +4,7 @@
       "title": "Log in",
       "loginButton": "Log in",
       "footer": {
-        "accountAbsence": "No account?",
+        "accountAbsence": "No account? ",
         "registration": "Sign up"
       },
       "fields": {
@@ -96,7 +96,7 @@
     "removeChannelModal": {
       "title": "Delete channel",
       "body": "Are you sure?",
-      "buttonSend": "Send",
+      "buttonSend": "Delete",
       "buttonCancel": "Сancel"
     },
     "addChannelModal": {
