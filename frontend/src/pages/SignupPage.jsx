@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import imgSrc from '../assets/signup.jpg';
 import { SignupForm } from '../components/SignupForm/index';
 import { UnauthorizedLayout } from '../components/UnauthorizedLayout';
+import { SignupFooter } from '../components/SignupFooter';
 
 export const SignupPage = () => {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ export const SignupPage = () => {
         <img src={imgSrc} className="rounded-circle" alt={t('forms.signupForm.title')} />
         <SignupForm />
       </div>
+      <SignupFooter />
     </UnauthorizedLayout>
   );
 };
