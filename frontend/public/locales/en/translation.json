@@ -25,6 +25,10 @@
     "signupForm": {
       "title": "Registration",
       "signupButton": "Sign up",
+      "footer": {
+        "accountExist": "Already have account? ",
+        "registration": "Log in"
+      },
       "fields": {
         "username": {
           "label": "Username",

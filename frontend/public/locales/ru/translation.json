@@ -25,6 +25,10 @@
     "signupForm": {
       "title": "Регистрация",
       "signupButton": "Зарегистрироваться",
+      "footer": {
+        "accountExist": "Есть аккаунт? ",
+        "registration": "Войти"
+      },
       "fields": {
         "username": {
           "label": "Имя пользователя",
