@@ -1,25 +1,46 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
+import { remove, rename } from '../store/modalsSlice';
 
-export const ChannelDropdown = ({ channel, handleRemove, handleRename }) => {
+export const ChannelDropdown = ({ channel }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const { currentChannelId } = useSelector(({ chats }) => chats);
+
+  const handleRemove = (data) => {
+    dispatch(remove(data));
+  };
+
+  const handleRename = (data) => {
+    dispatch(rename(data));
+  };
 
   return (
     <Dropdown>
       <Dropdown.Toggle
         variant={channel.id === currentChannelId ? 'secondary' : 'light'}
         className="rounded-0 h-100 border-0"
-        // style={{ marginLeft: -1 }}
       >
         <span className="visually-hidden">{t('pages.home.dropdown')}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item eventKey="1" onClick={handleRemove(channel)}>
+        <Dropdown.Item
+          eventKey="remove"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemove(channel);
+          }}
+        >
           {t('pages.homePage.channels.dropdownButtonDelete')}
         </Dropdown.Item>
-        <Dropdown.Item eventKey="2" onClick={handleRename(channel)}>
+        <Dropdown.Item
+          eventKey="rename"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRename(channel);
+          }}
+        >
           {t('pages.homePage.channels.dropdownButtonRename')}
         </Dropdown.Item>
       </Dropdown.Menu>
