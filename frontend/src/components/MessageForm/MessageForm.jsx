@@ -6,7 +6,7 @@ import filter from 'leo-profanity';
 
 import { useSocket } from '../../providers/SocketProvider';
 import { useAuth } from '../../providers/AuthProvider/useAuth';
-import { getMessageValidation } from '../../validation/getMessageValidation';
+import { getMessageValidation } from './getMessageValidation';
 
 export const MessageForm = () => {
   const { t } = useTranslation();

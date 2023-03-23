@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { getNewUserValidation } from '../../validation/getNewUserValidation';
+import { getNewUserValidation } from './getNewUserValidation';
 import { useAuth } from '../../providers/AuthProvider/index';
 import { PATHS } from '../../const';
 import { UsernameInput } from './UsernameInput';
