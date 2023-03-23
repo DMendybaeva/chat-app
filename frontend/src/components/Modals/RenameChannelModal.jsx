@@ -56,7 +56,7 @@ export const RenameChannelModal = ({ modalInfo, handleHide }) => {
               {t('modals.renameChannelModal.label')}
             </Form.Label>
             <div className="invalid-feedback" />
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end mt-4">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
                 {t('modals.renameChannelModal.buttonCancel')}
               </Button>
