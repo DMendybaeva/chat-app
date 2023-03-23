@@ -8,6 +8,7 @@ import '../index.css';
 export const Channels = () => {
   const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
+  const { currentChannelId } = useSelector(({ chats }) => chats);
 
   const handleClick = (channel) => () => {
     dispatch(setCurrentChannelId(channel.id));
@@ -19,10 +20,16 @@ export const Channels = () => {
     <Nav fill variant="pills" className="flex-column px-2">
       {channels.map((channel) => (
         <Nav.Item className="w-100" key={channel.id} style={{ display: 'flex' }}>
-          <Nav.Link as="button" onClick={handleClick(channel)} eventKey={channel.id} className={classes}>
+          <Nav.Link
+            as="button"
+            onClick={handleClick(channel)}
+            eventKey={channel.id}
+            className={classes}
+            active={channel.id === currentChannelId}
+          >
             {`# ${channel.name}`}
           </Nav.Link>
-          {channel.removable && <ChannelDropdown channel={channel} />}
+          {channel.removable && <ChannelDropdown channel={channel} currentChannelId={currentChannelId} />}
         </Nav.Item>
       ))}
     </Nav>

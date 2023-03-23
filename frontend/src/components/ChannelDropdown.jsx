@@ -1,12 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { remove, rename } from '../store/modalsSlice';
 
-export const ChannelDropdown = ({ channel }) => {
+export const ChannelDropdown = ({ channel, currentChannelId }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { currentChannelId } = useSelector(({ chats }) => chats);
 
   const handleRemove = (data) => {
     dispatch(remove(data));
