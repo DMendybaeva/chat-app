@@ -38,7 +38,7 @@ export const MessageForm = () => {
           value={formik.values.text}
           onChange={formik.handleChange}
         />
-        <Button type="submit" disabled="" className="btn btn-group-vertical">
+        <Button type="submit" disabled={formik.values.text === ''} variant="light">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
             <path
               fillRule="evenodd"
