@@ -40,11 +40,11 @@ export const LoginForm = () => {
       }}
     >
       {(props) => (
-        <Form className="w-50" onSubmit={props.handleSubmit}>
+        <Form onSubmit={props.handleSubmit}>
           <h1 className="text-center mb-4">{t('forms.loginForm.title')}</h1>
           <UsernameInput />
           <PasswordInput />
-          <Button variant="outline-primary" type="submit" className="w-100">
+          <Button variant="outline-primary" type="submit" className="w-100 mb-3" disabled={props.isSubmitting}>
             {t('forms.loginForm.loginButton')}
           </Button>
         </Form>
