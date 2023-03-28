@@ -47,7 +47,7 @@ export const SignupForm = () => {
           <UsernameInput />
           <PasswordInput />
           <RepeatedPassword />
-          <Button variant="outline-primary" type="submit" className="w-100">
+          <Button variant="outline-primary" type="submit" className="w-100" disabled={props.isSubmitting}>
             {t('forms.signupForm.signupButton')}
           </Button>
         </Form>
