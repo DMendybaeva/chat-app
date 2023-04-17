@@ -19,7 +19,7 @@ export const Channels = () => {
   return (
     <Nav fill variant="pills" className="flex-column px-2 overflow-auto mb-3 h-100 d-block">
       {channels.map((channel) => (
-        <Nav.Item className="w-100" key={channel.id} style={{ display: 'flex' }}>
+        <Nav.Item className="w-100 d-flex" key={channel.id}>
           <Nav.Link
             as="button"
             onClick={handleClick(channel)}

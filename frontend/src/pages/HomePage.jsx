@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import { fetchChats } from '../store/chatsSlice';
 import { useAuth } from '../providers/AuthProvider/useAuth';
 import { showErrorToast } from '../helpers/showToast';
 import { ChannelsBar } from '../components/HomePageBars/ChannelsBar';
-import { MessagesBar } from '../components/HomePageBars/MessagesBar';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -35,11 +35,13 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="container h-100 my-4 overflow-hidden rounded shadow">
-      <div className="row h-100 bg-white flex-md-row">
-        <ChannelsBar />
-        <MessagesBar />
-      </div>
-    </div>
+    <Container className="h-100 my-4 overflow-hidden rounded shadow">
+      <Row className="h-100 bg-white">
+        <Col xs={4} md={3} lg={2} className="border-end pt-5 px-0 bg-light">
+          <ChannelsBar />
+        </Col>
+        {/* <MessagesBar /> */}
+      </Row>
+    </Container>
   );
 };

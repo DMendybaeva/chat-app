@@ -42,7 +42,7 @@ export const SignupForm = () => {
       }}
     >
       {(props) => (
-        <Form className="w-50" onSubmit={props.handleSubmit}>
+        <Form onSubmit={props.handleSubmit}>
           <h1 className="text-center mb-4">{t('forms.signupForm.title')}</h1>
           <UsernameInput />
           <PasswordInput />

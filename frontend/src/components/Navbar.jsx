@@ -1,24 +1,27 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Navbar as BootstrapNavbar } from 'react-bootstrap';
 
 import { AuthButton } from './AuthButton';
 import { PATHS } from '../const';
 import { LangSwitcher } from './LangSwitcher';
+import { useAuth } from '../providers/AuthProvider';
 
 export const Navbar = () => {
   const { t } = useTranslation();
+  const auth = useAuth();
 
   return (
-    <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+    <BootstrapNavbar bg="white" expand="lg" className="shadow-sm">
       <div className="container">
-        <Link className="navbar-brand" to={PATHS.home}>
+        <BootstrapNavbar.Brand as={Link} to={PATHS.home}>
           {t('navbar.homeLink')}
-        </Link>
+        </BootstrapNavbar.Brand>
         <div>
           <LangSwitcher />
-          <AuthButton />
+          {auth.loggedIn && <AuthButton />}
         </div>
       </div>
-    </nav>
+    </BootstrapNavbar>
   );
 };
