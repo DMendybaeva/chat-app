@@ -6,10 +6,8 @@ export const AuthButton = () => {
   const { t } = useTranslation();
 
   return (
-    auth.loggedIn && (
-      <button type="button" className="btn btn-primary" onClick={auth.logOut}>
-        {t('navbar.authButton')}
-      </button>
-    )
+    <button type="button" className="btn btn-primary" onClick={auth.logOut}>
+      {t('navbar.authButton')}
+    </button>
   );
 };

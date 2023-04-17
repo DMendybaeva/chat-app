@@ -16,6 +16,7 @@ export const UsernameInput = () => {
         onChange={handleChange}
         value={values.username}
         isInvalid={errors.username}
+        autoFocus
       />
       <Form.Control.Feedback type="invalid" tooltip>
         {t(errors.username)}

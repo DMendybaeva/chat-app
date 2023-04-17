@@ -6,7 +6,7 @@ import filter from 'leo-profanity';
 
 import { useSocket } from '../../providers/SocketProvider';
 import { useAuth } from '../../providers/AuthProvider/useAuth';
-import { getMessageValidation } from '../../validation/getMessageValidation';
+import { getMessageValidation } from './getMessageValidation';
 
 export const MessageForm = () => {
   const { t } = useTranslation();
@@ -37,8 +37,9 @@ export const MessageForm = () => {
           className="border-0 p-0 ps-2"
           value={formik.values.text}
           onChange={formik.handleChange}
+          autoFocus
         />
-        <Button type="submit" disabled="" className="btn btn-group-vertical">
+        <Button type="submit" disabled={formik.values.text === ''} variant="light">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
             <path
               fillRule="evenodd"

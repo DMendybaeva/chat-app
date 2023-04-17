@@ -3,8 +3,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-  channels: [], // {name, id, removable}
-  messages: [], // {text, author, channelId, id}
+  channels: [],
+  messages: [],
   currentChannelId: null,
   isLoading: false,
   error: null,
@@ -29,6 +29,7 @@ const chatsSlice = createSlice({
     },
     addChannel: (state, { payload }) => {
       state.channels = [...state.channels, payload];
+      state.currentChannelId = payload.id;
     },
     removeChannel: (state, { payload }) => {
       if (state.currentChannelId === payload.id) {

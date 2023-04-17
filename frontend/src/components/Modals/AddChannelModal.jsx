@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 
 import { useSocket } from '../../providers/SocketProvider';
-import { getChannelValidationSchema } from '../../validation/getChannelValidationSchema';
+import { getChannelValidationSchema } from './getChannelValidationSchema';
 import { showSuccessToast } from '../../helpers/showToast';
 
 export const AddChannelModal = ({ handleHide }) => {

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 
 import { useSocket } from '../../providers/SocketProvider';
-import { getChannelValidationSchema } from '../../validation/getChannelValidationSchema';
+import { getChannelValidationSchema } from './getChannelValidationSchema';
 import { showSuccessToast } from '../../helpers/showToast';
 
 export const RenameChannelModal = ({ modalInfo, handleHide }) => {
@@ -56,7 +56,7 @@ export const RenameChannelModal = ({ modalInfo, handleHide }) => {
               {t('modals.renameChannelModal.label')}
             </Form.Label>
             <div className="invalid-feedback" />
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end mt-4">
               <Button variant="secondary" type="button" className="me-2" onClick={handleHide}>
                 {t('modals.renameChannelModal.buttonCancel')}
               </Button>

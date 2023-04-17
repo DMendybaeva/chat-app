@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { getNewUserValidation } from '../../validation/getNewUserValidation';
+import { getNewUserValidation } from './getNewUserValidation';
 import { useAuth } from '../../providers/AuthProvider/index';
 import { PATHS } from '../../const';
 import { UsernameInput } from './UsernameInput';
@@ -42,12 +42,12 @@ export const SignupForm = () => {
       }}
     >
       {(props) => (
-        <Form className="w-50" onSubmit={props.handleSubmit}>
+        <Form onSubmit={props.handleSubmit}>
           <h1 className="text-center mb-4">{t('forms.signupForm.title')}</h1>
           <UsernameInput />
           <PasswordInput />
           <RepeatedPassword />
-          <Button variant="outline-primary" type="submit" className="w-100">
+          <Button variant="outline-primary" type="submit" className="w-100" disabled={props.isSubmitting}>
             {t('forms.signupForm.signupButton')}
           </Button>
         </Form>

@@ -4,7 +4,7 @@
       "title": "Войти",
       "loginButton": "Войти",
       "footer": {
-        "accountAbsence": "Нет аккаунта?",
+        "accountAbsence": "Нет аккаунта? ",
         "registration": "Регистрация"
       },
       "fields": {
@@ -25,6 +25,10 @@
     "signupForm": {
       "title": "Регистрация",
       "signupButton": "Зарегистрироваться",
+      "footer": {
+        "accountExist": "Есть аккаунт? ",
+        "registration": "Войти"
+      },
       "fields": {
         "username": {
           "label": "Имя пользователя",
@@ -98,7 +102,7 @@
     "removeChannelModal": {
       "title": "Удалить канал",
       "body": "Уверены?",
-      "buttonSend": "Отправить",
+      "buttonSend": "Удалить",
       "buttonCancel": "Отменить"
     },
     "addChannelModal": {

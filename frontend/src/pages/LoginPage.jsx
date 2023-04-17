@@ -1,33 +1,26 @@
 import { useTranslation } from 'react-i18next';
+import { Card, Col, Image } from 'react-bootstrap';
 import imgSrc from '../assets/login.jpg';
 import { LoginForm } from '../components/LoginForm/index';
-import { PATHS } from '../const';
+import { UnauthorizedLayout } from '../components/UnauthorizedLayout';
+import { LoginFooter } from '../components/LoginFooter';
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="container-fluid h-100">
-      <div className="row justify-content-center align-content-center h-100">
-        <div className="col-12 col-md-8 col-xxl-6">
-          <div className="card shadow-sm">
-            <div className="card-body row p-5">
-              <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src={imgSrc} alt={t('forms.loginForm.title')} className="rounded-circle" />
-              </div>
-              <LoginForm />
-            </div>
-            <div className="card-footer p-4">
-              <div className="text-center">
-                <span>{t('forms.loginForm.footer.accountAbsence')}</span>
-                <a href={PATHS.signup}>{t('forms.loginForm.footer.registration')}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <UnauthorizedLayout>
+      <Card>
+        <Card.Body className="row p-5">
+          <Col md={6} className="d-flex align-items-center justify-content-center">
+            <Image roundedCircle alt={t('forms.loginForm.title')} src={imgSrc} />
+          </Col>
+          <Col md={6}>
+            <LoginForm />
+          </Col>
+        </Card.Body>
+        <LoginFooter />
+      </Card>
+    </UnauthorizedLayout>
   );
 };
-
-export default LoginPage;

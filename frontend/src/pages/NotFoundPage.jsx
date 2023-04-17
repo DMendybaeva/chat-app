@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import imgSrc from '../assets/notFoundPage.svg';
 import { PATHS } from '../const';
 
-const NotFoundPage = () => {
+export const NotFoundPage = () => {
   const { t } = useTranslation();
   return (
     <div className="text-center">
@@ -17,5 +17,3 @@ const NotFoundPage = () => {
     </div>
   );
 };
-
-export default NotFoundPage;

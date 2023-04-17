@@ -1,53 +1,37 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { SplitButton, Dropdown, Nav, Button } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import { Nav } from 'react-bootstrap';
 
 import { setCurrentChannelId } from '../store/chatsSlice';
+import { ChannelDropdown } from './ChannelDropdown';
+import '../index.css';
 
-const Channels = ({ handleRemove, handleRename }) => {
+export const Channels = () => {
   const { channels } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { currentChannelId } = useSelector(({ chats }) => chats);
 
   const handleClick = (channel) => () => {
     dispatch(setCurrentChannelId(channel.id));
   };
-  const { currentChannelId } = useSelector((state) => state.chats);
 
-  const classes = 'w-100 rounded-0 text-start';
+  const classes = 'w-100 rounded-0 text-start text-truncate';
 
   return (
-    <Nav fill variant="pills" className="flex-column px-2">
-      {channels.map((channel) =>
-        !channel.removable ? (
-          <Nav.Item className="w-100" key={channel.id}>
-            <Button
-              variant={currentChannelId === channel.id ? 'secondary' : 'light'}
-              className={classes}
-              onClick={handleClick(channel)}
-            >
-              {t('pages.homePage.channels.channelName', { channelName: channel.name })}
-            </Button>
-          </Nav.Item>
-        ) : (
-          <SplitButton
-            size="sm"
-            variant={currentChannelId === channel.id ? 'secondary' : 'light'}
+    <Nav fill variant="pills" className="flex-column px-2 overflow-auto mb-3 h-100 d-block">
+      {channels.map((channel) => (
+        <Nav.Item className="w-100 d-flex" key={channel.id}>
+          <Nav.Link
+            as="button"
             onClick={handleClick(channel)}
-            title={`# ${channel.name}`}
+            eventKey={channel.id}
             className={classes}
-            key={channel.id}
+            active={channel.id === currentChannelId}
           >
-            <Dropdown.Item eventKey="1" onClick={handleRemove(channel)}>
-              {t('pages.homePage.channels.dropdownButtonDelete')}
-            </Dropdown.Item>
-            <Dropdown.Item eventKey="2" onClick={handleRename(channel)}>
-              {t('pages.homePage.channels.dropdownButtonRename')}
-            </Dropdown.Item>
-          </SplitButton>
-        ),
-      )}
+            {`# ${channel.name}`}
+          </Nav.Link>
+          {channel.removable && <ChannelDropdown channel={channel} currentChannelId={currentChannelId} />}
+        </Nav.Item>
+      ))}
     </Nav>
   );
 };
-export default Channels;

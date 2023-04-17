@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom';
 
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import NotFoundPage from './pages/NotFoundPage';
-import SignupPage from './pages/SignupPage';
+import { HomePage } from './pages/HomePage';
+import { LoginPage } from './pages/LoginPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { SignupPage } from './pages/SignupPage';
 import { useAuth } from './providers/AuthProvider/index';
 import { PATHS } from './const';
 
