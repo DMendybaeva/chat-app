@@ -7,6 +7,7 @@ import { fetchChats } from '../store/chatsSlice';
 import { useAuth } from '../providers/AuthProvider/useAuth';
 import { showErrorToast } from '../helpers/showToast';
 import { ChannelsBar } from '../components/HomePageBars/ChannelsBar';
+import { MessagesBar } from '../components/HomePageBars/MessagesBar';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export const HomePage = () => {
         <Col xs={4} md={3} lg={2} className="border-end pt-5 px-0 bg-light">
           <ChannelsBar />
         </Col>
-        {/* <MessagesBar /> */}
+        <MessagesBar />
       </Row>
     </Container>
   );
