@@ -26,10 +26,10 @@ export const ChannelDropdown = ({ channel, currentChannelId }) => {
         <span className="visually-hidden">{t('pages.home.dropdown')}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item eventKey="remove" onClick={handleRemove}>
+        <Dropdown.Item eventKey="remove" onClick={handleRemove(channel)}>
           {t('pages.homePage.channels.dropdownButtonDelete')}
         </Dropdown.Item>
-        <Dropdown.Item eventKey="rename" onClick={handleRename}>
+        <Dropdown.Item eventKey="rename" onClick={handleRename(channel)}>
           {t('pages.homePage.channels.dropdownButtonRename')}
         </Dropdown.Item>
       </Dropdown.Menu>
