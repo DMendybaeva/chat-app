@@ -8,7 +8,7 @@ export const SocketProvider = ({ children, socket }) => {
   const dispath = useDispatch();
   const values = useMemo(
     () => ({
-      newMessage: (message) => socket.volatile.emit('newMessage', message),
+      newMessage: (message, response) => socket.volatile.emit('newMessage', message, response),
       newChannel: (channel, response) => socket.volatile.emit('newChannel', channel, response),
       removeChannel: (channel) => socket.volatile.emit('removeChannel', channel),
       renameChannel: (channel) => socket.volatile.emit('renameChannel', channel),
