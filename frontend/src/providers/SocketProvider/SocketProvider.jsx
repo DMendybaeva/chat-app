@@ -10,8 +10,8 @@ export const SocketProvider = ({ children, socket }) => {
     () => ({
       newMessage: (message, response) => socket.volatile.emit('newMessage', message, response),
       newChannel: (channel, response) => socket.volatile.emit('newChannel', channel, response),
-      removeChannel: (channel) => socket.volatile.emit('removeChannel', channel),
-      renameChannel: (channel) => socket.volatile.emit('renameChannel', channel),
+      removeChannel: (channel, response) => socket.volatile.emit('removeChannel', channel, response),
+      renameChannel: (channel, response) => socket.volatile.emit('renameChannel', channel, response),
     }),
     [socket.volatile],
   );

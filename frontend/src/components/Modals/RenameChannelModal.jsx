@@ -26,10 +26,17 @@ export const RenameChannelModal = ({ modalInfo, handleHide }) => {
     validationSchema: getChannelValidationSchema(channels),
     onSubmit: (values) => {
       const newChannel = { id: modalInfo.modalChannel.id, name: filter.clean(values.channelName) };
-      renameChannel(newChannel);
-      showSuccessToast(t('toasts.rename'));
-      formik.resetForm();
-      handleHide();
+      const handleAcknowledgements = ({ status }) => {
+        if (status === 'ok') {
+          showSuccessToast(t('toasts.rename'));
+          formik.resetForm();
+          handleHide();
+        } else {
+          console.error(status);
+        }
+      };
+
+      renameChannel(newChannel, handleAcknowledgements);
     },
   });
 

@@ -17,15 +17,6 @@ export const AddChannelModal = ({ handleHide }) => {
   const { t } = useTranslation();
   const dispath = useDispatch();
 
-  const handleAcknowledgements = ({ status, data }) => {
-    if (status === 'ok') {
-      const { id } = data;
-      dispath(setCurrentChannelId(id));
-    } else {
-      console.error(status);
-    }
-  };
-
   useEffect(() => {
     inputEl.current.focus();
   }, []);
@@ -37,10 +28,19 @@ export const AddChannelModal = ({ handleHide }) => {
     validationSchema: getChannelValidationSchema(channels),
     onSubmit: (values) => {
       const channel = { name: filter.clean(values.channelName) };
+      const handleAcknowledgements = ({ status, data }) => {
+        if (status === 'ok') {
+          const { id } = data;
+          dispath(setCurrentChannelId(id));
+          showSuccessToast(t('toasts.newChannel'));
+          formik.resetForm();
+          handleHide();
+        } else {
+          console.error(status);
+        }
+      };
+
       newChannel(channel, handleAcknowledgements);
-      showSuccessToast(t('toasts.newChannel'));
-      formik.resetForm();
-      handleHide(); // добавить acknowlegment от socket как call back на emit
     },
   });
 

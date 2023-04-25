@@ -11,9 +11,14 @@ export const RemoveChannelModal = ({ modalInfo, handleHide }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    removeChannel(channel);
-    showSuccessToast(t('toasts.remove'));
-    handleHide();
+    removeChannel(channel, ({ status }) => {
+      if (status === 'ok') {
+        showSuccessToast(t('toasts.remove'));
+        handleHide();
+      } else {
+        console.error(status);
+      }
+    });
   };
 
   return (
