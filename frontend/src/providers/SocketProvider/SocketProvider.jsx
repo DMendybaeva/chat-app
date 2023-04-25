@@ -9,7 +9,7 @@ export const SocketProvider = ({ children, socket }) => {
   const values = useMemo(
     () => ({
       newMessage: (message) => socket.volatile.emit('newMessage', message),
-      newChannel: (channel) => socket.volatile.emit('newChannel', channel),
+      newChannel: (channel, response) => socket.volatile.emit('newChannel', channel, response),
       removeChannel: (channel) => socket.volatile.emit('removeChannel', channel),
       renameChannel: (channel) => socket.volatile.emit('renameChannel', channel),
     }),
