@@ -1,6 +1,6 @@
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
@@ -8,12 +8,14 @@ import filter from 'leo-profanity';
 import { useSocket } from '../../providers/SocketProvider';
 import { getChannelValidationSchema } from './getChannelValidationSchema';
 import { showSuccessToast } from '../../helpers/showToast';
+import { setCurrentChannelId } from '../../store/chatsSlice';
 
 export const AddChannelModal = ({ handleHide }) => {
   const { newChannel } = useSocket();
   const { channels } = useSelector((state) => state.chats);
   const inputEl = useRef(null);
   const { t } = useTranslation();
+  const dispath = useDispatch();
 
   useEffect(() => {
     inputEl.current.focus();
@@ -26,10 +28,19 @@ export const AddChannelModal = ({ handleHide }) => {
     validationSchema: getChannelValidationSchema(channels),
     onSubmit: (values) => {
       const channel = { name: filter.clean(values.channelName) };
-      newChannel(channel);
-      showSuccessToast(t('toasts.newChannel'));
-      formik.resetForm();
-      handleHide();
+      const handleAcknowledgements = ({ status, data }) => {
+        if (status === 'ok') {
+          const { id } = data;
+          dispath(setCurrentChannelId(id));
+          showSuccessToast(t('toasts.newChannel'));
+          formik.resetForm();
+          handleHide();
+        } else {
+          console.error(status);
+        }
+      };
+
+      newChannel(channel, handleAcknowledgements);
     },
   });
 

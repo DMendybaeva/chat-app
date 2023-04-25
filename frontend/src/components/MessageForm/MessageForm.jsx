@@ -22,8 +22,13 @@ export const MessageForm = () => {
     onSubmit: ({ text }) => {
       const { username } = getUserInfo();
       const message = { channelId: currentChannelId, text: filter.clean(text), username };
-      newMessage(message);
-      formik.resetForm();
+      newMessage(message, ({ status }) => {
+        if (status === 'ok') {
+          formik.resetForm();
+        } else {
+          console.error(status);
+        }
+      });
     },
   });
 
