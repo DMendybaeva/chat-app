@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/da834f8ac050eefd98b9/maintainability)](https://codeclimate.com/github/DMendybaeva/chat-app/maintainability)
 
 This project is simple implementation of minimal chat application, like Slack, etc. After registration you can managing (add, rename and remove) channels, add messages.
-You can check deployed project on [Railway](chat-app-production-159a.up.railway.app).
+You can check deployed project on [Railway](https://chat-app-production-159a.up.railway.app).
 
 Used technologies:
 
